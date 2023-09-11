@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="css/ex13.css">
+</head>
+
+<body>
+  <div class="show-all-value" style="display: flex; justify-content: center; align-items: center; margin-top: 4rem;">
+  </div>
+
+  <div class="container"
+    style="display: flex;
+    flex-direction: column; justify-content: center; align-items: center; gap: 2rem; margin-top: 1rem;"
+  >
+
+    <div style="width: 100%; display: flex; justify-content: center; align-items: center; gap: 1rem;">
+
+      <div class="icon btn replay-btn">
+        <i class="fa-solid fa-repeat"></i>
+      </div>
+
+      <div class="icon btn play-btn">
+        <i class="fa-solid fa-play"></i>
+      </div>
+
+      <div class="icon btn volume-btn">
+        <i class="fa-solid fa-volume-high"></i>
+      </div>
+    </div>
+
+    <div class="player">
+
+      <span>00:00</span> <!-- previousElementSibling -->
+
+      <div class="progress-bar">
+        <!-- tool tip -->
+        <div class="tooltiptext">02:06</div>
+
+        <div class="progress">
+          <span class="dot-control-music">
+          </span>
+        </div>
+
+      </div>
+
+      <span>00:00</span> <!-- currentTimeEl -->
+
+
+    </div>
+
+  </div>
+
+  <audio class="audio" src="mp3/FantasticDream.mp3"></audio>
+
+  <script src=" js/ex13.js"></script>
+</body>
+
+</html>
