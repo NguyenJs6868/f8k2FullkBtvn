@@ -1,0 +1,173 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: 0;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; */
+}
+
+.player {
+  display: flex;
+}
+
+.play-btn {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.progress-bar {
+  width: 100%;
+  position: relative;
+  height: 20px;
+  background: gray;
+  margin: 0 20px;
+  cursor: pointer;
+}
+
+.progress-bar:hover {
+  background: greenyellow;
+}
+
+.progress-bar .progress {
+  position: absolute;
+  background: red;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.progress-bar .progress span {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  bottom: 0;
+  width: 25px;
+  height: 25px;
+  display: block;
+  border-radius: 50%;
+  background: blueviolet;
+  translate: 50% -50%;
+}
+
+.progress-bar .time-preview {
+  position: absolute;
+  top: 0;
+  translate: -50% -110%;
+  background: black;
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 2px 5px;
+  display: none;
+}
+
+.progress-bar .time-preview .show {
+  display: block;
+}
+
+.open-karaoke {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.open-karaoke > button {
+  color: #fff;
+  cursor: pointer;
+  background: #8a2be2;
+  border: 0;
+  padding: 5px 15px;
+}
+
+
+.karaoke {
+  color: #fff;
+  background: #892be2;
+  padding: 15px;
+  transition: translate .4s;
+  position: fixed;
+  inset: 0;
+  translate: 0 100vh;
+}
+
+
+/* btnOpenKaraoke */
+.karaoke.show {
+  translate: 0 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.karaoke .karaoke-header {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.karaoke .karaoke-header h2 {
+  font-size: 3rem;
+}
+
+/* btnClose */
+.karaoke .karaoke-header .close {
+  border: 1px solid #fff;
+  border-radius: 50px;
+  background: #892be2;
+  color: #fff;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.karaoke .karaoke-header span i {
+  transform: translateY(12%);
+}
+
+.karaoke .karaoke-inner {
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  font-size: 3rem;
+  font-weight: 700;
+  display: flex;
+
+  margin: auto;
+}
+
+.karaoke .karaoke-inner div {
+  border: 1px solid red;
+  height: 200px;
+}
+
+.karaoke .karaoke-inner p {
+  margin: 30px 0;
+  /*  */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /* max-height: 500px;
+  word-break: break-all;
+  overflow: hidden;
+  position: fixed;
+  top: 50%;
+  transform: translate(50%, -50%);
+  left: -50%;
+  width: 80%; */
+}
