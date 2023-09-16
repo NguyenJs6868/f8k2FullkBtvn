@@ -129,24 +129,50 @@ playBtn.addEventListener("click", function () {
   }
 });
 
+// Dùng nhạc bằng phím cách
+window.addEventListener("keydown", function(event) {
+  if (event.keyCode === 32) {
+    console.log("Người dùng đã nhấn nút cách");
+    if (audio.paused) {
+      audio.play();
+      this.innerHTML = pauseBtnIcon;
+    } else {
+      audio.pause();
+      this.innerHTML = playBtnIcon;
+    }
+  }
+})
+
 var oneLyric = ""
+var line1 =
 audio.addEventListener("timeupdate", function () {
   //Lấy ra tỷ lệ phần trăm dựa vào currentTime và duration
   var value = (audio.currentTime * 100) / audio.duration;
   lyric.forEach(function({words}){
-    console.log('lyric.forEach {words}: ', words);
+    // console.log('lyric.forEach {words}: ', words);
     // console.log('words: ', words.length);
 
     words.forEach(function(data){
-      if(audio.currentTime * 1000 + 2000 >= data.startTime &&
-         audio.currentTime * 1000 + 2000 <= data.endTime){
+      console.log('words.forEach data: ', data);  // 2000
+      if(
+        audio.currentTime * 1000 >= data.startTime && audio.currentTime * 1000 <= data.endTime){
         oneLyric += data.data + " "
-
       }
     })
+
+    // Được ... kí tự thì xóa bộ nhớ quay lại gán / dòng thứ 2 nhiều chữ...
+    // const wordCount = oneLyric.split(" ").length;
+    // console.log("Số từ trong câu: " + wordCount);
+    // if (wordCount >= 12) {
+    //   oneLyric = ""
+    // }
+
+    //
   })
-  karaokeInner.innerHTML = oneLyric;
   console.log(oneLyric);
+  karaokeInner.children[0].innerHTML = oneLyric; // Gán hiện thị lời
+
+
   if (!isDrag) {
     currentTimeEl.innerText = getTime(audio.currentTime);
 
@@ -182,10 +208,7 @@ audio.addEventListener("pause", function () {
   playBtn.innerHTML = playBtnIcon;
 });
 
-
 var btnOpenKaraoke = document.querySelector(".open-karaoke");
-
-
 var karaoke = document.querySelector(".karaoke");
 
 // Bật màn show
