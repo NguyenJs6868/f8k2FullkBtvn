@@ -24,13 +24,12 @@
 			<div class="main-controls">
 
 				<div class="dropdown">
-
 					<button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">File</button>
 
-					<div class="dropdown-menu show">
-						<button id="new-btn" class="dropdown-item">New</button>
-						<button id="txt-btn" class="dropdown-item">Save as TXT</button>
-						<button id="pdf-btn" class="dropdown-item">Save as PDF</button>
+					<div class="dropdown-menu ">
+						<button id="new-btn" class="btn dropdown-item">New</button>
+						<button id="txt-btn" class="btn dropdown-item">Save as TXT</button>
+						<button id="pdf-btn" class="btn dropdown-item">Save as PDF</button>
 					</div>
 				</div>
 
@@ -48,9 +47,12 @@
 
 		</div>
 
-		<div id="content" contenteditable="true" spellcheck="false"></div>
+		<textarea id="content" contenteditable="true" spellcheck="false"></textarea>
 
-		<div class="d-flex justify-content-end gap-3"><span>Số ký tự: 0</span><span>Số từ: 0</span></div>
+		<div class="d-flex justify-content-end gap-3">
+			<span>Số ký tự: 0</span>
+			<span>Số từ: 0</span>
+		</div>
 
 	</div>
 
