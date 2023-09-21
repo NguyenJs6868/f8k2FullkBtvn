@@ -1,0 +1,63 @@
+#title {
+	border-bottom: 2px solid #ccc;
+	margin-bottom: 10px;
+	padding: 10px 0;
+}
+
+.control-btn-container, .controls, .main-controls {
+	display: flex;
+}
+
+.controls {
+	justify-content: space-between;
+}
+
+.control-btn-container, .controls, .main-controls {
+	display: flex;
+}
+
+.dropdown, .dropdown-center, .dropend, .dropstart, .dropup, .dropup-center {
+	position: relative;
+}
+
+
+.dropdown-menu.show {
+	display: block !important;
+	position: absolute;
+	inset: 0px auto auto 0px;
+	margin: 0px;
+	transform: translate(0px, 40px);
+}
+
+
+#filename-input {
+	margin-left: 10px;
+}
+
+.control-btn {
+	height: 100%;
+	margin-left: 8px;
+	width: 50px;
+}
+
+
+/*  */
+#content {
+	box-shadow: 0 0 5px 0 rgba(0,0,0,.5);
+	margin: 30px 0;
+	min-height: 300px;
+	outline: none;
+	padding: 20px;
+}
+
+
+/*  */
+.gap-3 {
+	gap: 1rem!important;
+}
+.justify-content-end {
+	justify-content: flex-end!important;
+}
+.d-flex {
+	display: flex!important;
+}
