@@ -13,14 +13,14 @@ var btnGetLink = document.querySelector(".action button");
 console.log('btnGetLink: ', [btnGetLink]);
 
 
-var initStartTime = 2; // 30 giây ban đầu cho tự chạy
+var initStartTime = 30; // 30 giây ban đầu cho tự chạy
 var flagTimeOut = false; // Cở hết giờ, sau 30s sẽ mở = true
 
 function countdown(seconds) {
 	var startTime = Date.now();
 	// console.log("startTime: ", startTime);
 
-	function updateTimer() {
+	const updateTimer = () => {
 			var elapsedTime = Date.now() - startTime;
 			var remainingTime = seconds * 1000 - elapsedTime;
 			// Thời gian còn lại = 30s*1000 => (30 000) - thời gian trôi qua
@@ -48,7 +48,20 @@ countdown(initStartTime);
 // Gán sự kiện chuyển trang cho Nút GetLink
 btnGetLink.addEventListener("click", function () {
 	if (flagTimeOut) {
-		// window.location.href = 'https://fullstack.edu.vn';
-		window.open("https://fullstack.edu.vn", "_blank"); //This will open Google in a new window.
+		window.location.href = 'https://fullstack.edu.vn';
+		// window.open("https://fullstack.edu.vn", "_blank"); //This will open Google in a new window.
 	}
+});
+
+// document.addEventListener("visibilitychange", function() {
+// 	if (document.hidden) {
+// 			console.log("Người dùng đã chuyển sang tab mới");
+// 	} else {
+// 			console.log("Người dùng đã quay trở lại tab hiện tại");
+// 	}
+// });
+
+// Dừng đếm ngược nếu chuyển tab khác xem
+document.addEventListener("DOMContentLoaded", () => {
+	window.requestAnimationFrame(updateTimer);
 });
