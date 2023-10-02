@@ -55,7 +55,7 @@ if (carouselItems.length > 0) {
       carouselInner.style.translate = `${translated}px`;
     });
   });
-  
+
 
   var position = 0;
   // 1 Xử lý chuyển slide khi click vào nút NEXT
