@@ -1,0 +1,85 @@
+/*
+.zoom-page {
+	width: 100%;
+	height: 100vh;
+
+}
+
+.zoom-page > div {
+	padding: 0.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.25rem;
+	transform: translateY(10%);
+}
+
+.frame-img {
+	border: 1px solid red;
+	width: 40%;
+}
+
+.img-been-zoom {
+	width: 100%;
+}
+
+.img-been-zoom:hover {
+	cursor: zoom-in;
+}
+
+.zomm-area {
+	width: 40%;
+}
+
+.zomm-area img {
+	width: 100%;
+} */
+
+.zoom-page {
+	width: 100%;
+	height: 100vh;
+  display: flex;
+  padding: 0.5rem;
+  gap: 0.5rem;
+}
+
+.frame {
+	border: 4px solid red;
+
+  width: 400px;
+  height: 266.5px;
+
+  overflow: hidden;
+  cursor: zoom-in;
+  background-image: url(/Day_34/img/low-light-through-windows.png);
+
+}
+
+/* .frame img:hover {
+  opacity: 0;
+} */
+
+.frame img {
+  transition: opacity 0.5s;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.zoom {
+	/* border: 1px solid red; */
+  width: 400px;
+  height: 266.5px;
+
+  overflow: hidden;
+  /* cursor: zoom-in; */
+
+  background-position: 50% 50%;
+  position: relative;
+
+  /* background:url(//res.cloudinary.com/active-bridge/image/upload/slide1.jpg) */
+  background-image: url(/Day_34/img/low-light-through-windows.png);
+
+  display: none;
+
+}
