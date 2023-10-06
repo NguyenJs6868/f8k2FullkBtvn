@@ -51,7 +51,8 @@
 
   overflow: hidden;
   cursor: zoom-in;
-  background-image: url(/Day_34/img/low-light-through-windows.png);
+  /* background-image: url(/Day_34/img/low-light-through-windows.png); */
+  background-image: url("https://amateurphotographer.com/wp-content/uploads/sites/7/2018/12/low-light-through-windows.jpg");
 
 }
 
@@ -78,7 +79,7 @@
   position: relative;
 
   /* background:url(//res.cloudinary.com/active-bridge/image/upload/slide1.jpg) */
-  background-image: url(/Day_34/img/low-light-through-windows.png);
+  background-image: url("https://amateurphotographer.com/wp-content/uploads/sites/7/2018/12/low-light-through-windows.jpg");
 
   display: none;
 
