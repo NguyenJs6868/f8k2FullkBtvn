@@ -6,16 +6,16 @@
 	user-select: none;
 	font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;}
 
-.btn {
+.btn-custom {
 	/* border: 1px solid red; */
 	cursor: pointer;
 	transition: all 0.2s ease;
 }
 
-.btn:hover {
+.btn-custom:hover {
 	opacity: 0.6;
 }
 
-.btn:active {
+.btn-custom:active {
 	opacity: 1;
 }

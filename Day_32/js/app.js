@@ -68,3 +68,8 @@ F8.theComponent("counter-app", {
 		</button>
 	`,
 });
+
+
+customElement.theComponent("header-component", {
+	template: `<h1>HEADER</h1>`,
+});

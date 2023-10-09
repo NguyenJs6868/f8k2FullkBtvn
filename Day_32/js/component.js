@@ -6,7 +6,7 @@ class F8 {
 	static theComponent(componentName, options) {
     // console.log('1 componentName: ', componentName);
     // console.log('2 options: ', options);
-//
+
     class customElement extends HTMLElement {
       constructor() {
         // super để gọi hàm constructor của lớp cha Animal và truyền tham số vào. Đảm bảo rằng thuộc tính ... được khởi tạo trong lớp cha.
@@ -50,31 +50,31 @@ class F8 {
 
             // console.log('item.textContent: ', item.textContent);
 
-//             const splitItems = item.textContent.split(" ");
-//             // console.log('splitItems: ', splitItems);
-//
-//             item.innerHTML = ""; // Gán lại bằng chuỗi rống sau gán lại text
-//
-//             splitItems.forEach(splitItem => {
-//               // console.log('for splitItem: ', splitItem);
-//
-//               // const str = "{{title}}";
-//               const result = splitItem.replace(/{{|}}/g, "");
-//               // console.log('for result: ', result);
-//
-//               if(result.match(/title/)) {
-//                 window['title'] = this.data.title
-//                 item.innerText = title
-//               }
-//
-//               if(result.match(/counter/)) {
-//                 console.log('matchresult: ', result);
-//                 window['counter'] = this.data.counter
-//                 item.innerText = counter
-//
-//               }
-//
-//             });
+            const splitItems = item.textContent.split(" ");
+            // console.log('splitItems: ', splitItems);
+
+            item.innerHTML = ""; // Gán lại bằng chuỗi rống sau gán lại text
+
+            splitItems.forEach(splitItem => {
+              // console.log('for splitItem: ', splitItem);
+
+              // const str = "{{title}}";
+              const result = splitItem.replace(/{{|}}/g, "");
+              // console.log('for result: ', result);
+
+              if(result.match(/title/)) {
+                window['title'] = this.data.title
+                item.innerText = title
+              }
+
+              if(result.match(/counter/)) {
+                console.log('matchresult: ', result);
+                window['counter'] = this.data.counter
+                item.innerText = counter
+
+              }
+
+            });
 
           });
 

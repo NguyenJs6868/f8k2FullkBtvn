@@ -1,0 +1,5 @@
+class customElement {
+	constructor() {}
+
+	static
+};
