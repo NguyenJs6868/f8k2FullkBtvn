@@ -2,7 +2,7 @@
 
 import { client } from "./client.js";
 
-async function renderTasksUI() {
+async function renderListTodo() {
 	const { data:  listTask } = await client.get(`/tasks`);
     console.log('listTask :', listTask, listTask.length);
 
@@ -33,4 +33,12 @@ async function renderTasksUI() {
 
 }
 
-renderTasksUI();
+renderListTodo();
+
+// @click="deleteItem(${item.id})"
+const btnDelete = document.querySelector('.btn-trash')
+console.log('btnDelete: ', btnDelete);
+
+function deleteItem(id) {
+    console.log('Delete', id);
+}

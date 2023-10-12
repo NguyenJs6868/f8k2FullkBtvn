@@ -1,0 +1,109 @@
+
+
+
+
+
+/* portfolio */
+.portfolio__header-content {
+	width: 70%;
+	margin: 80px auto;
+    text-align: center;
+}
+
+.section__item-name {
+	font-size: 4rem;
+	font-weight: 600;
+	position: relative;
+	display: inline-block;
+	padding: 0 3px;
+	margin-bottom: 30px;
+}
+
+.list-category {
+    
+}
+
+.wrap-item {
+    /* border: 1px solid green; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item {
+    /* border: 1px solid red; */
+    width: 80%;
+}
+
+.title {
+    color: white;
+    font-size: 2.4rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.tag {
+    display: flex;
+    width: fit-content;
+    padding: 0.8rem 2rem;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 10rem;
+    border: 1px solid #6eeb83;
+    color: #6eeb83;
+    font-size: 1.3rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.tag::before {
+    content: "#";
+    font-style: italic;
+}
+
+.item img {
+    width: 100%;
+}
+
+.item-content {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
+#loading {
+    font-size: 20px;
+    margin: auto;
+    text-align: center;
+    /* Ẩn loadding */
+    display: none;
+}
+
+/* .resume */
+
+
+@media screen and (max-width: 770px) {
+
+}
+
+@media screen and (max-width: 700px) {
+
+}
+
+@media screen and (max-width: 700px) {
+
+}
+
+
+/* .data {
+    categoryId: 1,
+    title
+    content
+    thumbnail
+   type: [
+  "popular",
+  "trending"
+]
+} */

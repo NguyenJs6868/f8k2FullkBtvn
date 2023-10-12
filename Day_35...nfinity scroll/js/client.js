@@ -16,10 +16,7 @@ export const getTasks = async () => {
 // getTasks();
 
 export const client = {
-
   send: async (url, method = "GET", body = null) => {
-  console.log('Gọi hàm client');
-
     url = SERVER_API + url;
     const options = {
       method,
