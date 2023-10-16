@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTVN Day 36 Quiz</title>
+</head>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="/common.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<!-- <link rel="stylesheet" href="assets/font/icon-fonts/icon-fonts/web-design/flaticon.css" /> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.4/js/bootstrap.min.js"
+    integrity="sha512-Cy3gSrKCS8aJ7AIaammc0wLXyKRmTa8ntgHvU01Tuz4EdsqVgk/lKzFm/b/8RxOWBaoHI2uGLLU6rXMbqKcGHA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+<body>
+    <!--  -->
+
+    <!-- container -->
+    <div class="quizizzGame ">
+        <!-- 1 Start -->
+        <div class="quizizzGames-start">
+            <div class="overlay"></div>
+            <div class="btn-custom  btn-start">Start</div>
+            <div class="downn-time">3</div>
+        </div>
+
+        <!-- 2 Play -->
+        <div class="quizizzGames-play">
+            <!-- Phần tính điểm và bonus -->
+            <div class="quizizz-games-play__top--calculate">
+
+                <div class="quizizzGame__top--timer">
+                    <div class="quizizz-games-play__top--timer-total">
+                        <div class="quizizzGame__top--timer-progress"></div>
+                    </div>
+                </div>
+
+                <div class="quizizzGame__top--inner">
+
+                    <div class="quizizz-games-play__top--calculate-left">
+
+                        <div class="calculate-left-block-step">
+                            <span id="current">1</span>/
+                            <span id="total">8</span>
+                        </div>
+
+                        <div class="quizizzGame__streak">
+                            <div class="quizizzGame__streak--status">Streak</div>
+                            <div class="streak-line"></div>
+                        </div>
+
+                        <div class="streak-bonus">+300</div>
+
+                    </div>
+
+
+                    <div class="quizizz-games-play__top--calculate-right">
+                        <div class="quizizzGame__top--score">
+                            <span>Score: 100</span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- Phần chơi chính -->
+            <div class="quizizz-games-play-question--main">
+
+                <div class="quizizzGame__question--text  overlay">
+                    <h3>Bạn sẽ làm được bài tập về nhà này chứ?</h3>
+                    <h4><em>(Choose 2 correct answer(s))</em></h4>
+                </div>
+
+                <!-- Các câu trả lời -->
+                <div class="quizizzGame__answers ">
+                    <div class="quizizzGame__answers--inner ">
+
+                        <div id=" " class="quizizzGame__answer--item  overlay">
+                            <div class="quizizzGame__answer--item-inner">Không :v</div>
+                        </div>
+
+                        <div id="correct-ans" class="quizizzGame__answer--item  overlay">
+                            <div class="quizizzGame__answer--item-inner">Có</div>
+                        </div>
+
+                        <div id="failure-ans" class="quizizzGame__answer--item  overlay">
+                            <div class="quizizzGame__answer--item-inner">Dễ :v</div>
+                        </div>
+
+                        <div id=" " class="quizizzGame__answer--item  overlay">
+                            <div class="quizizzGame__answer--item-inner">Thôi dẹp đi</div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Thông báo kết quả -->
+                <div class="quizizz-games-play-noti-answer">
+                    <span>CORRECT</span>
+                </div>
+
+
+            </div>
+
+
+
+
+        </div>
+
+        <!-- 3 Kết quả cuối -->
+        <div class="quizizzGames-result">
+            <div class="game-performance">
+                <div class="game-performance__title"></div>
+                <!-- 1 -->
+                <div class="summary-block">
+                    <p>Accuracy</p>
+                    <div class="accuracy-percent-total">Tiến trình</div>
+                </div>
+                <!-- 2 -->
+                <div class="calculate-points">
+
+                    <div class="calculate-points-item">
+                        <div class="calculate-points-item__point">4687</div>
+                        <div class="calculate-points-item__title">Score</div>
+                    </div>
+
+                    <div class="calculate-points-item">
+                        <div class="calculate-points-item__point">1</div>
+                        <div class="calculate-points-item__title">Streak</div>
+                    </div>
+
+                    <div class="calculate-points-item">
+                        <div class="calculate-points-item__point">4687</div>
+                        <div class="calculate-points-item__title">Correct</div>
+                    </div>
+
+                    <div class="calculate-points-item">
+                        <div class="calculate-points-item__point">4687</div>
+                        <div class="calculate-points-item__title">Incorrect</div>
+                    </div>
+
+                </div>
+                <!-- 3 -->
+                <div class="btn-actions-reset">
+                    <span>Play again</span>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <!--  -->
+
+    </div>
+
+
+
+
+
+    <!--  -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script> -->
+    <!--  -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script> -->
+    <script type="module" src="js/app.js"></script>
+    <!--  -->
+</body>
+
+</html>

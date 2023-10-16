@@ -1,0 +1,28 @@
+{
+	"quizz-questions": [
+		{
+			"id": 1,
+			"question": "Covid-19 xuất hiện lần đầu tiên ở nước nào ?",
+			"list-answer": ["Viet Nam", "USA", "China", "India"],
+			"require-double": false,
+			"require-text": ""
+		},
+		{
+			"id": 4,
+			"question": "Một con vịt có mấy cái cánh ?",
+			"list-answer": ["1 cánh", "2 đôi cánh", "1 đôi cánh", "Không có"],
+			"require-double": false,
+			"require-text": ""
+		}
+	],
+	"quizz-correct-answer": [
+		{"id": 1, "correct-answer": ["China"]},
+		{"id": 2, "correct-answer": ["7 ngày"]},
+		{"id": 3, "correct-answer": ["2 đôi đùi"]},
+		{"id": 4, "correct-answer": ["1 đôi cánh"]},
+		{"id": 5, "correct-answer": ["Có", "Dễ :v"]},
+		{"id": 6, "correct-answer": ["Có", "Chắc chắn rồi"]},
+		{"id": 7, "correct-answer": ["2 cánh"]},
+		{"id": 8, "correct-answer": ["Khoảng cách - Khẩu trang - Khử khuẩn - Khai báo y tế - Khử khuẩn"]}
+	]
+}
