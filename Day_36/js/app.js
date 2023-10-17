@@ -27,7 +27,9 @@
 
 */
 
-// màn start click nút -> chán sự kiện đếm ngược vs số in vẻ text vào (Dùng hàm giống bài getlink chuyển trang nhừng đếm ngược)
+// màn start click nút ->
+
+import { client } from "./client.js";
 
 const quizizzGameEL = document.querySelector(".quizizzGame");
 const quizizzGamesStartEL = quizizzGameEL.querySelector(".quizizzGames-start");
@@ -51,7 +53,7 @@ btnStartEL.addEventListener("click", function() {
         const timer = setInterval(() => {
             console.log(count);
             count--;
-
+            downnTimeEL.innerText = count;
             if (count === 0) {
                 downnTimeEL.innerText = "GO"
             }
@@ -72,5 +74,16 @@ btnStartEL.addEventListener("click", function() {
 
 });
 
+async function getListQuestion  () {
+    const res = await client.get(`/quizz-questions`);
+    console.log('getListQuestion res: ', res);
+};
+getListQuestion();
+
+async function getCorrectAnswer  () {
+    const res = await client.get(`/quizz-correct-answer/4`);
+    console.log('getCorrectAnswer res: ', res);
+};
+getCorrectAnswer();
 
 // -> remove màn start đi -> hiện màn PLay lên
