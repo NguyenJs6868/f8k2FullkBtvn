@@ -7,33 +7,16 @@
     padding: 0.5rem;
 }
 
-.btn-login {
-    background: #6eeb83;
-    color: #FFF;
-    border-radius: 8px;
-
-    display: flex;
-    width: 17.8rem;
-    height: 6rem;
-    padding: 1.7rem 4.3rem;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-}
-
-.btn-login span {
-
+.blog-page {
+    width: 100%;
+    height: 100%;
 }
 
 .blog {
     background: #272727;
 	width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
 }
@@ -46,17 +29,39 @@
 
 }
 .blog-item {
-    border: 1px solid gray;
+    border-bottom: 1px solid gray;
     color: #FFF;
+    padding: 1rem 0.5rem;
+    /* margin-bottom: 1rem; */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.blog-time-previous-time {
+    max-width: 25%;
+    min-width: 148px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    margin: 1rem 0;
-    gap: 0.5ren;
 }
 
-/* Login */
+.blog-item-main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+#root a, #root a:hover {
+    color: #fff;
+}
+
+/* Form */
 #root form {
     border: 1px solid gray;
     border-radius: 8px;
@@ -82,14 +87,18 @@
     height: 48px;
 }
 
-#root button {
-    border: 1px solid #6eeb83;
+#root  textarea {
     border-radius: 0.5rem;
-    background-color: #6eeb83;
-    color: #272727;
+    padding: 0.5rem;
+}
+
+#root button {
+    border-radius: 0.5rem;
     color: white;
     font-weight: 600;
-    padding: 0.5rem 1rem;
+    font-size: 14px;
+    font-style: normal;
+    line-height: normal;
 
     flex: 1;
     display: flex;
@@ -97,8 +106,24 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
+
+    /* position: fixed; */
+    right: 1rem;
 }
 
+.btn-sign-in {
+    background-color: #6eeb83;
+    border: 1px #6eeb83 !important;
+    top: 2rem;
+    left: 2rem;
+}
+
+.btn-log-out {
+    border: 1px red !important;
+    top: 2rem;
+    background: red !important;
+    right: 2rem;
+}
 
 .submit-login {
     border: 1px solid gray;
@@ -107,6 +132,13 @@
     justify-content: flex-start;
     align-items: center;
     padding: 0.25rem 0.5rem;
+}
+
+#btn-sign-in, #btn-sign-up, #btn-post-blog, #btn-sign-in-home
+{
+    background-color: #6eeb83!important;;
+    border: 1px #6eeb83 !important;
+    padding: 1rem 0 !important;;
 }
 
 #root form label {
@@ -120,12 +152,6 @@
 }
 
 
-.btn-log-out {
-    background: red !important;
-    position: fixed;
-    top: 2rem;
-    right: 1rem;
-}
 /*  */
 .row-item  {
     width: 100%;

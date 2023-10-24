@@ -21,7 +21,28 @@ let dataFormSignUp = {
     password: '',
 };
 
-function renderUiHomeList(listBlog, paramsHome) {
+// Khi đăng nhập check Token vs profile
+async function renderUiHomeList (listBlog, paramsHome) {
+    console.log('renderUiHomeList listBlog:', listBlog);
+
+//     var dataProfile = JSON.parse(localStorage.getItem("userData")); console.log(dataProfile);
+//     if (dataProfile && dataProfile.accessToken && dataProfile.refreshToken) {
+//         // console.log('Có userData accessToken refreshToken');
+//         paramsHome.isLogin = true;
+//         // Gửi lên token để lấy profile
+//         const {refreshToken} = dataProfile;
+//         const {accessToken} = dataProfile;
+//
+//         const resProfile = await client.get(`/users/profile`, {},  accessToken);
+//         console.log('resProfile: ', resProfile);
+//         // const {code} = resProfile.data.code;
+//         // if (code) {
+//         //     paramsHome.isLogin = true;
+//         // } else {
+//         //     paramsHome.isLogin = false;
+//         // }
+//     }
+
     if (listBlog) {
         return `
         ${paramsHome.isLogin ?
@@ -122,7 +143,8 @@ function renderUiFormSignUp(param) {
 }
 
 const toastUi = (param) => {
-    return ` <div class="toast-header">${param ? param : ''}</div>  `
+    content = ` <div class="toast-header">${param ? param : ''}</div>  `
+    return content;
 };
 
 
@@ -220,7 +242,6 @@ function signIn() {
     });
     /***************************************************** Xong đăng kí */
     signUp();
-
     /***************************************************** Xong đăng nhập */
 
     /******************************************************/
@@ -265,41 +286,54 @@ function signUp() {
 
 }
 
-// function logOut () {
-//
-//     const btnLogOutEL = blogPage.querySelector('.btn-log-out');
-//
-//     btnLogOutEL.addEventListener("click", async function(event) {
-//         console.log('Đăng xuất');
-//         const paramLogout = {
-//             Headers: 'Headers: Authorization Bearer accessToken'
-//         }
-//
-//         const resLogout = await client.post(`/auth/logout`, paramLogout );
-//         console.log('Đăng xuấtresLogout :', resLogout);
-//
-//     });
-// }
-
-async function logout () {
+async function handleLogout () {
     console.log('Đăng xuất');
-    // const userData = localStorage.getItem("userData");
 
     const accessToken = JSON.parse(localStorage.getItem('userData')).accessToken
-
     console.log('accessToken', accessToken);
 
     const { data  } = await client.post(`/auth/logout`, {}, '', accessToken);
     const { code, message } = data;
     console.log('code, message: ', code, message);
 
-    if (code === 200) {
-        toastUi(message)
-        paramsHome.isLogin = false;
-        getListPost();
-    }
+    toastUi(message)
+    paramsHome.isLogin = false;
+    localStorage.removeItem("userData")
+    getListPost();
 
-  }
+}
+
+const getProfile = async () => {
+    const tokens = localStorage.getItem("login_token");
+    if (tokens) {
+      const { access_token: accessToken, refresh_token: refreshToken } =
+        JSON.parse(tokens);
+      if (!accessToken) {
+        //Xử lý logout
+        handleLogout();
+      } else {
+        //set token vào header của request
+        client.setToken(accessToken);
+        const { response, data } = await client.get("/users/profile");
+        if (!response.ok) {
+          const { data: newToken } = await requestRefresh(refreshToken);
+          //Gửi yêu cầu cấp lại accessToken mới
+
+          //Lấy được token mới -> Trả về cả refresh và access mới
+          if (newToken) {
+            localStorage.setItem("login_token", JSON.stringify(newToken));
+            getProfile(); //Gọi lại profile
+          } else {
+            //Xử lý logout -> 401
+            handleLogout();
+          }
+        } else {
+          const profileName = document.querySelector(".profile .name");
+          profileName.innerText = data.name;
+        }
+      }
+    }
+  };
 
 // Click Nút Sign up - đăng kí -> Gọi API đăng kí
 
