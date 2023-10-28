@@ -5,8 +5,8 @@ const root0 = document.getElementById('root0');
 const loaddingEl = document.querySelector('#loadding');
 const toastEl = document.querySelector('#toast');
 
-const ACCESS_TOKEN_KEY = "access_token";
-const REFRESH_TOKEN_KEY = "refresh_token";
+const ACCESS_TOKEN = "access_token";
+const REFRESH_TOKEN = "refresh_token";
 const STATUS_LOGIN = "status_login";
 
 let paramsHome = {
@@ -24,15 +24,23 @@ let dataFormSignIn = {
     password: '',
 };
 
-// function clearToken() {
-//     localStorage.removeItem(ACCESS_TOKEN_KEY);
-//     localStorage.removeItem(REFRESH_TOKEN_KEY);
-// }
+function clearToken() {
+    localStorage.removeItem(ACCESS_TOKEN);
+    localStorage.removeItem(REFRESH_TOKEN);
+}
 
-// function setToken({accessToken, refreshToken}) {
-//     localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
-//     localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
-// }
+function setToken(accessToken, refreshToken) {
+    localStorage.setItem(ACCESS_TOKEN, JSON.stringify(accessToken));
+    localStorage.setItem(REFRESH_TOKEN, JSON.stringify(refreshToken));
+}
+
+function getToken() {
+    const tokenResult = {
+        accessToken: JSON.parse(localStorage.getItem(ACCESS_TOKEN)),
+        refreshToken: JSON.parse(localStorage.getItem(REFRESH_TOKEN)),
+    };
+    return tokenResult
+}
 
 const setDidLogin = () => {
     localStorage.setItem(STATUS_LOGIN, 'true');
@@ -44,16 +52,14 @@ const setDidLogOut = () => {
 // setDidLogin();
 
 function checkStatusLogin() {
+    // const { accessToken, refreshToken } = getToken();
     const statusLogin = localStorage.getItem(STATUS_LOGIN);
-    // console.log('statusLogin', statusLogin, typeof statusLogin);
     if (paramsHome.isLogin || ( statusLogin && statusLogin === 'true')) {
         return true;
     } else {
         return false;
     };
 }
-
-STATUS_LOGIN
 
 function uiLoadding(status) {
     if(status) {
@@ -121,12 +127,13 @@ export const getInfo2 = async () => {
 };
 // Test
 export const getInfo = async () => {
-    const tokens = JSON.parse(localStorage.getItem("userData"));
+    // const tokens = JSON.parse(localStorage.getItem("userData"));
+    const { accessToken, refreshToken } = getToken();
 
-    if (tokens) {
+    if (accessToken && refreshToken) {
         console.log('Đã có token');
-        const accessToken = tokens.accessToken;
-        const refreshToken = tokens.refreshToken;
+        // const accessToken = tokens.accessToken;
+        // const refreshToken = tokens.refreshToken;
 
         const  { res, data } = await client.get("/users/profile", {}, accessToken);
         if ( res.status !== 200 ) {
@@ -163,6 +170,7 @@ export const getInfo = async () => {
 
     } else {
         console.log('Token mất vs bị remove');
+        setDidLogOut();
         handleSignUp(); // Mất / Xoa
     }
 
@@ -170,19 +178,23 @@ export const getInfo = async () => {
 
 async function autoLoginAgain() {
     const paramLogin = JSON.parse(localStorage.getItem("paramLogin"))
-    console.log('autoLoginAgain paramLogin: ', paramLogin);
+    // console.log('autoLoginAgain paramLogin: ', paramLogin);
     const resLogin = await client.post(`/auth/login`, paramLogin);
     const { code, data, message } = resLogin.data;
     if (code === 200) {
-        alert(message)
         paramsHome.isLogin = true;
-        localStorage.setItem("userData", JSON.stringify(data));
+
+        const { accessToken } = data;
+        const { refreshToken } = data;
+        setToken(accessToken, refreshToken);
+        setDidLogin();
+
         console.log('Hết hạn khóa dự phòng refretoken gọi luôn tự đăng nhập lại từ tk trước đó');
     }
 }
 
 export function regexYouTubesLink(stingUrl) {
-    console.log('Đầu vào stingUrl: ', stingUrl);
+    // console.log('Đầu vào stingUrl: ', stingUrl);
     // const urlYoutobe2 = "https://www.youtube.com/watch?v=MjLCeo80u3Y&list=PLW-VrTgjB8QLsZ1hf7zZ2GP66L8SbJeRk&index=37";
     const urlYoutobe2 = "https://www.youtube.com/watch?v=LlG5H8quCoY";
 
@@ -197,21 +209,21 @@ export function regexYouTubesLink(stingUrl) {
         const result = patternYoutobe.test(stingUrl);
 
         if ( result === true) {
-            console.log('Qua test Regex đây là link youtobe');
+            // console.log('Qua test Regex đây là link youtobe');
 
             let youtubeLinks = String(stingUrl).match(patternYoutobe);
-            console.log('youtubeLinks :', youtubeLinks);
+            // console.log('youtubeLinks :', youtubeLinks);
 
             const matchYoutubeLinks = youtubeLinks[0].match(patternYoutobe);
 
-            console.log(matchYoutubeLinks[1]);
+            // console.log(matchYoutubeLinks[1]);
             let videoId = matchYoutubeLinks[1];
 
             const iframeElement = `<iframe src="https://www.youtube.com/embed/${videoId}" width="640"  height="320" title="Iframe Example"></iframe> `
             return iframeElement;
 
         } else {
-            console.log('Qua test Regex đây Không phải link youtobe');
+            // console.log('Qua test Regex đây Không phải link youtobe');
             return stingUrl;
         }
 
@@ -311,43 +323,56 @@ async function uiHomeDidLogin(data) {
                 title: title,
                 content: content,
             }
-            postBlog(body);
+
+            const { accessToken, refreshToken } = getToken();
+            console.log('accessToken gửi lên để đăng blog', accessToken);
+            const { res } = await client.post(`/blogs`, body, {}, accessToken);
+            console.log('res post bài', res );
+
+            if (res.status == 200) {
+                uiHomeDidLogin();
+            } else if (res.status == 401 ) {
+                console.log('Post bài không được');
+                autoLoginAgain()
+            }
+            // postBlog(body);
 
         });
     }
 
 
 
-    // /blogs
 }
 
-async function postBlog(body) {
-    const tokens = JSON.parse(localStorage.getItem("userData"));
-
-    if (tokens) {
-        const accessToken = tokens.accessToken;
-        const refreshToken = tokens.refreshToken;
-
-        const { res, data } = await client.post(`/blogs`, body, {}, accessToken);
-
-        // const { res, data } = await client.get("/users/profile", {}, accessToken);
-
-        if ( res.status === 401 ) {
-            // const refreshToken = tokens.refreshToken;
-            const { res, data } = await client.post("/auth/refresh-token", {refreshToken});
-            console.log('postBlog auth/refresh-token :', refreshToken);
-
-            if (res.status === 401) {
-                // localStorage.removeItem("userData");
-                handleSignUp();
-            }
-        }
-        if (res.status === 200) {
-            uiHomeDidLogin();
-        }
-    }
-
-}
+// async function postBlog(body) {
+//     const tokens = JSON.parse(localStorage.getItem("userData"));
+//
+//     getInfo();
+//
+//     if (tokens) {
+//         const accessToken = tokens.accessToken;
+//         const refreshToken = tokens.refreshToken;
+//
+//         const { res, data } = await client.post(`/blogs`, body, {}, accessToken);
+//
+//         // const { res, data } = await client.get("/users/profile", {}, accessToken);
+//
+//         if ( res.status === 401 ) {
+//             // const refreshToken = tokens.refreshToken;
+//             const { res, data } = await client.post("/auth/refresh-token", {refreshToken});
+//             console.log('postBlog auth/refresh-token :', refreshToken);
+//
+//             if (res.status === 401) {
+//                 // localStorage.removeItem("userData");
+//                 handleSignUp();
+//             }
+//         }
+//         if (res.status === 200) {
+//             uiHomeDidLogin();
+//         }
+//     }
+//
+// }
 
 function UiBlogItem(dataBlogs ,parames) {
     let uiHomeList = ``;
@@ -605,19 +630,30 @@ function handleSignUp() {
             email: emailInput.value,
             password: passInput.value,
         }
-        localStorage.setItem("paramLogin", JSON.stringify(paramLogin));
+
+        localStorage.setItem("paramLogin", JSON.stringify(paramLogin)); // Save input
         const resLogin = await client.post(`/auth/login`, paramLogin);
 
         const { code, data, message } = resLogin.data;
         if (code === 200) {
             paramsHome.isLogin = true;
-            const parseData = JSON.stringify(data);
+            setDidLogin();
+
+            console.log('login: ', data);
+
             // Lưu token
-            localStorage.setItem("userData", parseData);
+            localStorage.setItem("userData", JSON.stringify(data));
+            console.log('lưu token', data);
+
+            const { accessToken } = data;
+            const { refreshToken } = data;
+
+            setToken(accessToken, refreshToken);
+
+            // function getToken(accessToken, refreshToken);
 
             // renderHome(); // Đăng nhập xong về màn home list
             toastUi(message)
-            setDidLogin();
             uiHomeDidLogin();
         } else {
             setDidLogOut();
