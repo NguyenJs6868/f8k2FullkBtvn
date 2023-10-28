@@ -181,41 +181,38 @@ async function autoLoginAgain() {
     }
 }
 
-export function regexYouTubesLink(urlYoutobe) {
-    console.log('Đầu vào urlYoutobe: ', urlYoutobe);
+export function regexYouTubesLink(stingUrl) {
+    console.log('Đầu vào stingUrl: ', stingUrl);
     // const urlYoutobe2 = "https://www.youtube.com/watch?v=MjLCeo80u3Y&list=PLW-VrTgjB8QLsZ1hf7zZ2GP66L8SbJeRk&index=37";
     const urlYoutobe2 = "https://www.youtube.com/watch?v=LlG5H8quCoY";
-    const regexYoutobe = /^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9_-]+(&[a-zA-Z0-9_-]+=[a-zA-Z0-9_-]+)*$/;
+
+    const patternYoutobe = /^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9_-]+(&[a-zA-Z0-9_-]+=[a-zA-Z0-9_-]+)*$/g;
 
     // let videoId = `MjLCeo80u3Y`;
     // let videoId = ``;
 
-    if (urlYoutobe) {
-        function isYouTubeLink(urlYoutobe) {
-            if (regexYoutobe.test(urlYoutobe) === true) {
-                console.log('Qua test Regex đây là link youtobe');
-                return true;
-            }
-            console.log('Qua test Regex đây Không phải link youtobe');
-            return false;
-        }
 
-        if (isYouTubeLink() === true ) {
+    if (stingUrl) {
 
-            let youtubeLinks = urlYoutobe.match(regexYoutobe);
-            if (youtubeLinks) {
-                // console.log('youtubeLinks :', youtubeLinks);
+        const result = patternYoutobe.test(stingUrl);
 
-                const matchYoutubeLinks = youtubeLinks[0].match(regexIdYoutobe);
-                console.log(matchYoutubeLinks[1]);
-                // let videoId = matchYoutubeLinks[1];
+        if ( result === true) {
+            console.log('Qua test Regex đây là link youtobe');
 
-                const iframeElement = `<iframe src="https://www.youtube.com/embed/${matchYoutubeLinks[1]}" width="640"  height="320" title="Iframe Example"></iframe> `
-                return iframeElement;
-            }
+            let youtubeLinks = String(stingUrl).match(patternYoutobe);
+            console.log('youtubeLinks :', youtubeLinks);
+
+            const matchYoutubeLinks = youtubeLinks[0].match(patternYoutobe);
+
+            console.log(matchYoutubeLinks[1]);
+            let videoId = matchYoutubeLinks[1];
+
+            const iframeElement = `<iframe src="https://www.youtube.com/embed/${videoId}" width="640"  height="320" title="Iframe Example"></iframe> `
+            return iframeElement;
 
         } else {
-            return urlYoutobe;
+            console.log('Qua test Regex đây Không phải link youtobe');
+            return stingUrl;
         }
 
     }
@@ -368,7 +365,6 @@ function UiBlogItem(dataBlogs ,parames) {
                 <div class="blog-item-main-content">
                     <span class="blog-item__user-name"><strong>User name:</strong> ${ item?.userId.name}</span>
                     <span class="blog-item__title"><strong>Title:</strong> ${item?.title}</span>
-                    <span class="blog-item__content"><strong>Content:</strong> ${item?.content}</span>
 
                     <span class="blog-item__content"><strong>Content YouTobobe:</strong> ${regexYouTubesLink(item?.content)}</span>
 
