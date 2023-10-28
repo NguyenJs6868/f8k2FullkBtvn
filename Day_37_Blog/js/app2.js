@@ -1,7 +1,13 @@
 import HttpClient from "./httpClient.js";
 const client = new HttpClient();
 const root = document.getElementById('root');
-const blogEl = document.querySelector('.blog');
+const root0 = document.getElementById('root0');
+const loaddingEl = document.querySelector('#loadding');
+const toastEl = document.querySelector('#toast');
+
+const ACCESS_TOKEN_KEY = "access_token";
+const REFRESH_TOKEN_KEY = "refresh_token";
+const STATUS_LOGIN = "status_login";
 
 let paramsHome = {
     isLogin: false,
@@ -13,34 +19,80 @@ let dataFormSignUp = {
     password: '',
 };
 
-const toastUi = (param) => {
-    const divElement  = document.createElement("div");
-    divElement.classList.add("toast-header")
-    const spanElement  = document.createElement("span");
-    divElement.appendChild(spanElement);
-    blogEl.appendChild(divElement);
-
-    // const content = ` <div class="toast-header"><span>${param ? param : ''}</span></div>  `
-    // root.innerHTML = content;
-    // const toasEl = root.querySelector('.toast-header');
-    // setTimeout(() => {
-    //     toasEl.remove();
-    // }, 5000);
-    // return content;
+let dataFormSignIn = {
+    email: '',
+    password: '',
 };
 
-export const getInfo = async () => {
+// function clearToken() {
+//     localStorage.removeItem(ACCESS_TOKEN_KEY);
+//     localStorage.removeItem(REFRESH_TOKEN_KEY);
+// }
+
+// function setToken({accessToken, refreshToken}) {
+//     localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
+//     localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
+// }
+
+const setDidLogin = () => {
+    localStorage.setItem(STATUS_LOGIN, 'true');
+}
+
+const setDidLogOut = () => {
+    localStorage.setItem(STATUS_LOGIN, 'false');
+}
+// setDidLogin();
+
+function checkStatusLogin() {
+    const statusLogin = localStorage.getItem(STATUS_LOGIN);
+    // console.log('statusLogin', statusLogin, typeof statusLogin);
+    if (paramsHome.isLogin || ( statusLogin && statusLogin === 'true')) {
+        return true;
+    } else {
+        return false;
+    };
+}
+
+STATUS_LOGIN
+
+function uiLoadding(status) {
+    if(status) {
+        loaddingEl.innerHTML = `<div class="loadersmall"></div>`;
+    } else {
+        const loadersmall = loaddingEl.querySelector('.loadersmall');
+        loadersmall.remove();
+    }
+}
+
+const toastUi = (param) => {
+    console.log('toastUi param: ', param);
+    if (param) {
+        toastEl.innerHTML = `<div class="toast-header"><span>${param ? param : ''}</span></div>`;
+        setTimeout(() => {
+            if (toastEl) {
+                toastEl.remove();
+            }
+        }, 3000);
+    }
+
+};
+toastUi('200');
+
+// Truyền mỗi token lên lấy profile, hết hạn nên về home, khi ấn login thì ->login
+export const getInfo2 = async () => {
     const tokens = JSON.parse(localStorage.getItem("userData"));
 
     if (tokens) {
+        console.log('Đã có token');
 
         const accessToken = tokens.accessToken;
         const refreshToken = tokens.refreshToken;
 
-        // Truyền mỗi token lên lấy profile, hết hạn nên về home, khi ấn login thì ->login
         const { res, data } = await client.get("/users/profile", {}, accessToken);
 
         if ( res.status !== 200 ) {
+            console.log('users/profile 200');
+
             const { res: resrefresh, data } = await client.post("/auth/refresh-token", {refreshToken});
             console.log('refreshToken resrefresh: ', resrefresh);
 
@@ -56,27 +108,136 @@ export const getInfo = async () => {
             }  else  {
                 localStorage.removeItem("userData");
                 handleSignUp();
+                console.log('Tiến hành cấp mới hoàn toàn tooken và refresh');
             }
 
         }
 
     } else {
+        console.log('Token mất vs bị remove');
         handleSignUp(); // Mất / Xoa
     }
 
 };
+// Test
+export const getInfo = async () => {
+    const tokens = JSON.parse(localStorage.getItem("userData"));
+
+    if (tokens) {
+        console.log('Đã có token');
+        const accessToken = tokens.accessToken;
+        const refreshToken = tokens.refreshToken;
+
+        const  { res, data } = await client.get("/users/profile", {}, accessToken);
+        if ( res.status !== 200 ) {
+            console.log('/users/profile KHÁC !== 200 => Cấp lại refreToken');
+
+            const {res: resRefresh, data: dataRefresh } = await client.post("/auth/refresh-token", {refreshToken});
+
+            if (resRefresh.status === 200) {
+                console.log('/auth/refresh-token 200, Cấp lại Token mới');
+
+                const userData = JSON.parse(localStorage.getItem("userData"))
+                console.log('userData Từ local trước đó: ', userData, typeof userData);
+
+                const newUserData = {
+                   ...userData,
+                   accessToken: dataRefresh.data.token.accessToken,
+                   refreshToken: dataRefresh.data.token.refreshToken,
+                }
+
+                console.log('refreshToken Mới: ', dataRefresh.data.token.refreshToken);
+                console.log('Lưu mới vào local cả obj ', newUserData, typeof JSON.stringify(newUserData));
+
+                localStorage.setItem("userData", JSON.stringify(newUserData));
+            }  else  {
+                console.log('/auth/refresh-token NOT 200 Xóa Token');
+                // localStorage.removeItem("userData");
+                // handleSignUp();
+                autoLoginAgain()
+            }
+
+        } else {
+            console.log('/users/profile === 200');
+        }
+
+    } else {
+        console.log('Token mất vs bị remove');
+        handleSignUp(); // Mất / Xoa
+    }
+
+};
+
+async function autoLoginAgain() {
+    const paramLogin = JSON.parse(localStorage.getItem("paramLogin"))
+    console.log('autoLoginAgain paramLogin: ', paramLogin);
+    const resLogin = await client.post(`/auth/login`, paramLogin);
+    const { code, data, message } = resLogin.data;
+    if (code === 200) {
+        alert(message)
+        paramsHome.isLogin = true;
+        localStorage.setItem("userData", JSON.stringify(data));
+        console.log('Hết hạn khóa dự phòng refretoken gọi luôn tự đăng nhập lại từ tk trước đó');
+    }
+}
+
+export function regexYouTubesLink(urlYoutobe) {
+    console.log('Đầu vào urlYoutobe: ', urlYoutobe);
+    // const urlYoutobe2 = "https://www.youtube.com/watch?v=MjLCeo80u3Y&list=PLW-VrTgjB8QLsZ1hf7zZ2GP66L8SbJeRk&index=37";
+    const urlYoutobe2 = "https://www.youtube.com/watch?v=LlG5H8quCoY";
+    const regexYoutobe = /^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=[a-zA-Z0-9_-]+(&[a-zA-Z0-9_-]+=[a-zA-Z0-9_-]+)*$/;
+
+    // let videoId = `MjLCeo80u3Y`;
+    // let videoId = ``;
+
+    if (urlYoutobe) {
+        function isYouTubeLink(urlYoutobe) {
+            if (regexYoutobe.test(urlYoutobe) === true) {
+                console.log('Qua test Regex đây là link youtobe');
+                return true;
+            }
+            console.log('Qua test Regex đây Không phải link youtobe');
+            return false;
+        }
+
+        if (isYouTubeLink() === true ) {
+
+            let youtubeLinks = urlYoutobe.match(regexYoutobe);
+            if (youtubeLinks) {
+                // console.log('youtubeLinks :', youtubeLinks);
+
+                const matchYoutubeLinks = youtubeLinks[0].match(regexIdYoutobe);
+                console.log(matchYoutubeLinks[1]);
+                // let videoId = matchYoutubeLinks[1];
+
+                const iframeElement = `<iframe src="https://www.youtube.com/embed/${matchYoutubeLinks[1]}" width="640"  height="320" title="Iframe Example"></iframe> `
+                return iframeElement;
+            }
+
+        } else {
+            return urlYoutobe;
+        }
+
+    }
+}
+
 // UI Home đã đăng nhập
-async function UiPostForm(data) {
+async function uiHomeDidLogin(data) {
     console.log("UI Home đã đăng nhập");
+    getInfo();
     const uiBlogPage = `
     <div class="blog">
         <div class="blog-page">
 
             <div class="d-flex justify-content-between align-content-center px-2 pt-2">
-                <div><button class="btn-custom" id="btn-log-out">Đăng xuất</button></div>
+            ${checkStatusLogin() ?
+                `<div><button class="btn-custom" id="btn-log-out">Đăng xuất</button></div>`
+                :
+                `<div><button class="btn-custom" id="btn-sign-in-home">Đăng nhập</button></div>`
+            }
             </div>
 
-            <form action="" class="post-blog-form">
+            ${checkStatusLogin() && `<form action="" class="post-blog-form">
                 <div class="row-item ">
                     <label for="blog-title">Enter Your title</label>
                     <input value="My title" type="text" id="blog-title"  placeholder="Please enter the title">
@@ -98,7 +259,7 @@ async function UiPostForm(data) {
                     </button>
                 </div>
 
-            </form>
+            </form>`}
 
             <div class="list-blog"></div>
         </div>
@@ -118,7 +279,7 @@ async function UiPostForm(data) {
             if (code === 200) {
                 dataBlogs = data.data;
                 listBlogEl.innerHTML = UiBlogItem(dataBlogs);
-                // UiPostForm();
+                // uiHomeDidLogin();
             }
             // const listBlog = data?.data;
 
@@ -180,12 +341,12 @@ async function postBlog(body) {
             console.log('postBlog auth/refresh-token :', refreshToken);
 
             if (res.status === 401) {
-                localStorage.removeItem("userData");
+                // localStorage.removeItem("userData");
                 handleSignUp();
             }
         }
         if (res.status === 200) {
-            UiPostForm();
+            uiHomeDidLogin();
         }
     }
 
@@ -193,7 +354,7 @@ async function postBlog(body) {
 
 function UiBlogItem(dataBlogs ,parames) {
     let uiHomeList = ``;
-
+    // Gọi hàm trả về render link youtobe
     if (dataBlogs) {
         uiHomeList = dataBlogs.map( (item) => {
             return (`
@@ -205,13 +366,13 @@ function UiBlogItem(dataBlogs ,parames) {
                 </div>
 
                 <div class="blog-item-main-content">
-                    <span class="blog-item__user-name">${'<strong>User name:</strong>'} ${ item?.userId.name}</span>
-                    <span class="blog-item__title">${'<strong>Title:</strong>'} ${item?.title}</span>
-                    <span class="blog-item__content">${'<strong>Content:</strong>'} ${item?.content}</span>
+                    <span class="blog-item__user-name"><strong>User name:</strong> ${ item?.userId.name}</span>
+                    <span class="blog-item__title"><strong>Title:</strong> ${item?.title}</span>
+                    <span class="blog-item__content"><strong>Content:</strong> ${item?.content}</span>
 
+                    <span class="blog-item__content"><strong>Content YouTobobe:</strong> ${regexYouTubesLink(item?.content)}</span>
 
-
-                    <span class="blog-item__see-detail"><a href="" ># ${item?.title}</a></span>
+                    <span class="blog-item__see-detail">${`<a href="" >`}# ${item?.title}</a></span>
                     <span class="blog-item__tag"># ${item?.userId.name}</span>
                     <span class="blog-item__time-ago">Khoảng 1 giây đọc.</span>
                 </div>
@@ -236,6 +397,30 @@ const renderHome = async () => {
                 <div><button class="btn-custom" id="btn-sign-in-home">Đăng nhập</button></div>
             </div>
 
+            <form action="" class="post-blog-form">
+                <div class="row-item ">
+                    <label for="blog-title">Enter Your title</label>
+                    <input value="My title" type="text" id="blog-title"  placeholder="Please enter the title">
+                </div>
+
+                <div class="row-item ">
+                    <label for="blog-content">Enter Your conten</label>
+                    <textarea name="" id="blog-content" value="My content" placeholder="comment here..." cols="100" rows="6"></textarea>
+                </div>
+
+                <div class="row-item mb-3">
+                    <label for="time-to-post">Set time to post!</label>
+                    <input type="time" id="time-to-post" >
+                </div>
+
+                <div class="w-100 d-flex mt-2">
+                    <button class="btn-custom " id="btn-post-blog">
+                        <span>Write new!</span>
+                    </button>
+                </div>
+
+        </form>
+
             <div class="list-blog"></div>
 
         </div>
@@ -249,13 +434,15 @@ const renderHome = async () => {
 
     // Gọi API GET list blog
     let dataBlogs = [];
+    uiLoadding(true);
     try {
-        await client.get(`/blogs`).then(({res, data}) => {
+        await client.get(`/blogs`).then(({data}) => {
             const code = data.code;
             if (code === 200) {
                 dataBlogs = data.data;
                 listBlogEl.innerHTML = UiBlogItem(dataBlogs);
-                // UiPostForm();
+                uiLoadding(false);
+                // uiHomeDidLogin();
             }
             // const listBlog = data?.data;
 
@@ -355,13 +542,13 @@ async function handleRegisterPage() {
                 // Lưu token
                 localStorage.setItem("userData", parseData);
                 // Đăng kí thành công hoặc trùng tk về trang đăng nhập
-                toastUi(message)
+                // toastUi(message)
                 handleSignUp();
             }   else if (status === 400) {
-                toastUi(message)
+                // toastUi(message)
                 handleSignUp();
             }   else {
-                toastUi(message)
+                // toastUi(message)
             }
 
 
@@ -415,26 +602,31 @@ function handleSignUp() {
 
         const emailInput = signInFormEL.querySelector('#email');
         const passInput = signInFormEL.querySelector('#pass-word');
+        dataFormSignIn.email = emailInput;
+        dataFormSignIn.password = passInput;
 
         const paramLogin = {
             email: emailInput.value,
             password: passInput.value,
         }
-
+        localStorage.setItem("paramLogin", JSON.stringify(paramLogin));
         const resLogin = await client.post(`/auth/login`, paramLogin);
 
         const { code, data, message } = resLogin.data;
         if (code === 200) {
-            // alert(message)
-            toastUi(message)
-
             paramsHome.isLogin = true;
             const parseData = JSON.stringify(data);
             // Lưu token
             localStorage.setItem("userData", parseData);
 
             // renderHome(); // Đăng nhập xong về màn home list
-            UiPostForm();
+            toastUi(message)
+            setDidLogin();
+            uiHomeDidLogin();
+        } else {
+            setDidLogOut();
+            toastUi(message)
+
         }
 
         // throw message;
@@ -443,7 +635,8 @@ function handleSignUp() {
 
 
 const render = async () => {
-    renderHome()
+    // renderHome()
+    uiHomeDidLogin();
 };
 
 render();
