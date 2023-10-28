@@ -326,22 +326,31 @@ async function uiHomeDidLogin(data) {
 
             const { accessToken, refreshToken } = getToken();
             console.log('accessToken gửi lên để đăng blog', accessToken);
+
             const { res } = await client.post(`/blogs`, body, {}, accessToken);
-            console.log('res post bài', res );
+            console.log('res post /blogs', res );
 
             if (res.status == 200) {
                 uiHomeDidLogin();
             } else if (res.status == 401 ) {
                 console.log('Post bài không được');
-                autoLoginAgain()
+                await autoLoginAgain();
+                autoPostBlogAgain(body, accessToken)
             }
-            // postBlog(body);
 
+
+            // postBlog(body);
         });
     }
+}
 
-
-
+async function autoPostBlogAgain(body, accessToken) {
+    const { res } = await client.post(`/blogs`, body, {}, accessToken);
+    if (res.status == 200) {
+        console.log('Post bài lại được', res);
+    } else {
+        console.log('Post bài lại KO được', res);
+    }
 }
 
 // async function postBlog(body) {
