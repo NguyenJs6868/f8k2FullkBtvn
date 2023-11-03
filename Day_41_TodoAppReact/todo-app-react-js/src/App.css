@@ -1,0 +1,298 @@
+
+.todo-app-react {
+  /* border: 1px solid red; */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  color: #fff;
+
+}
+
+.todo-app-react-frame {
+  /* border: 1px solid blue; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1.5rem;
+}
+
+.todo-app-react-wrap {
+  /* border: 1px solid red; */
+  background: #334155;
+  width: 100%;
+  min-width: 576px;
+  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 1rem;
+
+}
+
+.todo-app-react__title {
+  /* border: 1px solid red; */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  font-weight: 700;
+  font-size: 16px;
+
+}
+
+.todo-app-react__functions {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  margin: 0.5rem 0;
+
+}
+
+.function-add {
+  /* border: 1px solid red; */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.function-add input {
+  border: none;
+  flex: 1;
+  height: 100%;
+  background: transparent;
+  color: white;
+  font-weight: 600;
+  padding: 0 0.5rem ;
+}
+
+input:focus-visible {
+  outline: none;
+}
+
+input[type=radio] {
+  width: 17px;
+  height: 19px;
+}
+
+.todo-app-react__list-work {
+  /* border: 1px solid red; */
+  /* max-width: 768px; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.work-item {
+  /* border: 1px solid red; */
+  width: 89%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  background: #fff;
+  border-radius: 4px;
+  padding: 1.5rem 2rem 2rem;
+
+}
+
+.work-item__input {
+  border: rgba(229,231,235, 1);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  height: 40px;
+}
+
+.work-item__input input {
+  border: rgba(229,231,235, 1);
+  width: 100%;
+  height: 100%;
+}
+
+.line-through {
+  text-decoration-line: line-through;
+}
+
+.work-item__action-btn {
+  /* border: 1px solid red; */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+}
+
+.status-preview {
+  /* border: 1px solid red; */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.35rem;
+
+}
+
+.status-edit {
+  /* border: 1px solid red; */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+}
+
+.work-status {
+  /* border: 1px solid red; */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.25rem;
+  color: #000;
+}
+
+.input-radio {
+  /* border: 1px solid red; */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+}
+
+.status-edit__action-btn {
+  /* border: 1px solid red; */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.35rem;
+
+}
+
+/* btn */
+button {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+button:active {
+  opacity: 1;
+}
+
+.btn-add {
+   background: #14B8A6;
+}
+
+button {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  color: #fff;
+  font-weight: 600;
+  user-select: none;
+}
+
+button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+button:active {
+  opacity: 1;
+}
+
+.btn-add, .btn-update, .btn-edit  {
+   background: rgba(20,184,166);
+}
+.btn-completed {
+  background: #14B8A6;
+}
+.btn-exit {
+  background: rgba(249,115,22);
+}
+.btn-del {
+  background: rgba(239,68,68, 1);
+}
+
+
+/* .logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+*/
