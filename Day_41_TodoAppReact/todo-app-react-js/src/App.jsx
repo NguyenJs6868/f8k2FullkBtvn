@@ -3,25 +3,23 @@ import { useEffect, useState } from 'react'
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import loading from './component/loading/Loading';
-
-
-
-// useState
-import './App.css'
+import Loading from './component/loading/Loading';
+import './App.scss'
 import Button from './component/Button'
 
 import HttpClient from './helper/httpClient';
 const client = new HttpClient();
 
 function App() {
+  const [loadding, setLoadding] = useState(true);
   const [apiKey, setApiKey] = useState(localStorage.getItem("apiKey"));
-  const [contenTodo, setContenTodo] = useState('');
+  const [contenTodo, setContenTodo] = useState('To do ');
 
-  const [filters, setFilters] = useState({
-    apiKey: apiKey,
-    querry: "",
-  });
+  const [listTodo, setListTodo] = useState([]);
+
+     const [filters, setFilters] = useState({
+          querry: "",
+     });
 
 
   useEffect(() => {
@@ -48,56 +46,62 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 
-  async function getApiKey() {
-    let email = window.prompt("Please enter your email", "example@example.com");
-    if (!email) {
-      window.alert('Bạn cần nhập email để tiếp tục');
-      window.location.reload();
-    }
+     // Gọi API Key
+     async function getApiKey() {
+          let email = window.prompt("Please enter your email", "example@example.com");
+          if (!email) {
+               window.alert('Bạn cần nhập email để tiếp tục');
+               window.location.reload();
+          }
 
-    const { data} = await client.get('/api-key', {email});
-    const { code, data: dataGetApiKey} = data
-    if (code === 200) {
-      const { apiKey } = dataGetApiKey;
-      localStorage.setItem("apiKey", apiKey);
-      localStorage.setItem("email", email);
-      toast(`Chào mừng bạn`);
-    }
-  }
-  // xây form -> có action
-  // xây dựng hàm post truyền vào todo và api key,
-  // xây hàm delete truyền vào apikey và id của item todo
-  // xây hàm patch truyền vào todo hoặc is completeed hoặc cả hai
+          const { data} = await client.get('/api-key', {email});
+          const { code, data: dataGetApiKey} = data
+          if (code === 200) {
+               const { apiKey } = dataGetApiKey;
+               localStorage.setItem("apiKey", apiKey);
+               localStorage.setItem("email", email);
+               toast(`Chào mừng bạn`);
+          }
+     }
+      // xây form -> có action
+      // xây dựng hàm post truyền vào todo và api key,
+      // xây hàm delete truyền vào apikey và id của item todo
+      // xây hàm patch truyền vào todo hoặc is completeed hoặc cả hai
 
-  //   async function deleteTodo() {
-  //     console.log('delete');
-  //
-  //   };
+      //   async function deleteTodo() {
+      //     console.log('delete');
+      //   };
 
-  const getTodos = async (apiKey) => {
+     // Get list Todo
+      const getTodos = async (apiKey) => {
+        setLoadding(true);
+        const { data, res } = await client.get('/todos', {}, apiKey);
+        if (res.status === 200) {
+          const { listTodo } = data.data
+          setListTodo(listTodo);
+          setLoadding(false);
+        } else if (res.status === 401) {
+          setLoadding(false);
+          getApiKey();
+        }
+      };
 
-    const { data, res } = await client.get('/todos', filters, apiKey);
-    if (res.ok) {
-     console.log('data', data);
-    }
-  };
-
-  const listTodo = [
-    {
-      id: 1,
-      content: 'Todo 1',
-      // status_complete: true,
-      status_complete: false,
-      // editting: true,
-      editting: false,
-    },
-    {
-      id: 2,
-      content: 'Todo 2',
-      status_complete: false,
-      editting: true,
-    }
-  ]
+     // const listTodo = [
+     //      {
+     //           id: 1,
+     //           content: 'Todo 1',
+     //           // status_complete: true,
+     //           status_complete: false,
+     //           // editting: true,
+     //           editting: false,
+     //      },
+     //      {
+     //           id: 2,
+     //           content: 'Todo 2',
+     //           status_complete: false,
+     //           editting: true,
+     //      }
+     // ]
 
 
      // ADD Todo
@@ -107,10 +111,11 @@ function App() {
                todo: contenTodo,
           }
 
-          const { data} = await client.post('/todos', body, apiKey);
-          const { code, data: dataAddTodo} = data;
-          console.log('code', code);
-          console.log('dataAddTodo', dataAddTodo);
+          const { data } = await client.post('/todos', body, apiKey);
+          // const { code, data: dataAddTodo} = data;
+
+          console.log('data', data);
+          // console.log('dataAddTodo', dataAddTodo);
      }
 
      function handleEditContentTodo(event) {
@@ -123,6 +128,11 @@ function App() {
 
      async function handleChangeStatusTodo(id) {
           ('handleChangeStatusTodo', id);
+          // if(listTodo[id].editting === true) {
+          //      listTodo[id].editting === false
+          // } else {
+          //      listTodo[id].editting === true
+          // }
      }
      async function handleDeleteTodo(id) {
           ('handleDeleteTodo', id);
@@ -136,9 +146,8 @@ function App() {
 
   return (
     <>
-    <div className="spinner-border text-secondary" role="status">
-      <span className="sr-only">Loading...</span>
-    </div>
+    <Loading status={loadding}/>
+
     <div className="todo-app-react">
       <div className="container">
         <div className="todo-app-react-frame">
@@ -159,48 +168,55 @@ function App() {
             {/*  */}
             <div className="todo-app-react__list-work">
               {
-                listTodo.map((item) => (
+               listTodo ?
+               listTodo.map((item, index) => (
 
-                  <div key={item.id} className="work-item">
+                    <div key={index + 1} className="work-item">
 
-                    <div className="work-item__input">
-                      <input
-                        type="text" className={item.status_complete ? 'line-through' : '' }
-                        onChange={(event) => handleEditContentTodo(event)}
-                      />
-                    </div>
-                    {/*  */}
-                    <div className="work-item__action-btn">
-
-                      {item.editting ?
-                      <div className="status-preview">
-                        <Button onClick={() => handleEditTodo(item.id)} text="Sửa" className="btn-edit" />
-                        <Button onClick={() => handleDeleteTodo(item.id)} text="Xóa" className="btn-del" />
+                      <div className="work-item__input">
+                        <input
+                          type="text" className={item.isCompleted ? 'line-through' : '' } defaultValue={item.todo}
+                          onChange={(event) => handleEditContentTodo(event)}
+                        />
                       </div>
-                      :
-                      <div className="status-edit">
+                      {/*  */}
+                      <div className="work-item__action-btn">
 
-                        <div className="work-status">
-                          <label htmlFor="completed" onClick={() => handleChangeStatusTodo(item.id)} >
-                            { item.status_complete ? 'Completed ' : 'Not Completed' }
-                          </label>
-
-                          <input id="completed" type="checkbox" defaultChecked={true} onClick={() => handleChangeStatusTodo(item.id)}/>
-                          {/* !item.status_complete */}
-                        </div>
-
-
-                        <div className="status-edit__action-btn">
-                          <Button onClick={() => handleExitEditTodo(item.id)} text="Thoát" className="btn-exit" />
-                          <Button onClick={() => handleUpdateTodo(item.id)} text="Update" className="btn-update" />
+                        {item.editting ?
+                        <div className="status-preview">
+                          <Button onClick={() => handleEditTodo(item.id)} text="Sửa" className="btn-edit" />
                           <Button onClick={() => handleDeleteTodo(item.id)} text="Xóa" className="btn-del" />
                         </div>
-                      </div>
-                      }
+                        :
+                        <div className="status-edit">
 
-                    </div>
+                          <div className="work-status">
+                            <label htmlFor="completed" onClick={() => handleChangeStatusTodo(item.id)} >
+                              { item.isCompleted ? 'Completed ' : 'Not completed' }
+                            </label>
+
+                            <input id="completed" type="checkbox" defaultChecked={true} onClick={() => handleChangeStatusTodo(item.id)}/>
+                            {/* !item.isCompleted */}
+                          </div>
+
+
+                          <div className="status-edit__action-btn">
+                            <Button onClick={() => handleExitEditTodo(item.id)} text="Thoát" className="btn-exit" />
+                            <Button onClick={() => handleUpdateTodo(item.id)} text="Update" className="btn-update" />
+                            <Button onClick={() => handleDeleteTodo(item.id)} text="Xóa" className="btn-del" />
+                          </div>
+                        </div>
+                        }
+
+                      </div>
+                  </div>
+                  ))
+                :
+                <div className='todo-app-react__list-work-empty'>
+                  <div className="work-item">
+                    <span>Không có todo</span>
+                  </div>
                 </div>
-                ))
               }
 
               {/*  */}

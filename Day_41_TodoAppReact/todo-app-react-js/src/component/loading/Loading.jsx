@@ -1,26 +1,20 @@
-import { ThreeDots } from 'react-loader-spinner';
-import Styles from './loading.css';
-import clsx from 'clsx';
+// import loadingImg from "../assets/loading.svg";
+import './Loading.css';
 
-export default function loading(visible) {
-    return (
-        <ThreeDots
-            height="80"
-            width="80"
-            radius="9"
-            color="#4fa94d"
-            ariaLabel="three-dots-loading"
-            wrapperStyle={{
-                position: 'fixed',
-                inset: 0,
-                width: '100vw',
-                height: '100vh',
-                zIndex: 9999,
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}
-            wrapperClassName={clsx(Styles.loading)}
-            visible={visible}
-        />
-    );
+const Loading = (props) =>  {
+  const { status } = props;
+
+  return (
+    <>
+    {status &&
+    <div className="overlay">
+      <div className="loadersmall"></div>
+    </div>
+
+    }
+
+    </>
+  );
 }
+
+export default Loading;

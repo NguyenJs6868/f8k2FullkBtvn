@@ -11,6 +11,8 @@
 
   color: #fff;
 
+  /* display: none; */
+
 }
 
 .todo-app-react-frame {
@@ -104,20 +106,30 @@ input[type=radio] {
   gap: 2rem;
 }
 
+.todo-app-react__list-work-empty {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  & span {
+    color: #000;
+  }
+}
+
 .work-item {
   /* border: 1px solid red; */
   width: 89%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
 
   background: #fff;
   border-radius: 4px;
   padding: 1.5rem 2rem 2rem;
-
 }
+
+
 
 .work-item__input {
   border: rgba(229,231,235, 1);
@@ -186,8 +198,8 @@ input[type=radio] {
   color: #000;
 }
 
-.work-status span {
-  
+.work-status label {
+    user-select: none;
 }
 
 .input-radio {
@@ -262,6 +274,7 @@ button:active {
 .btn-del {
   background: rgba(239,68,68, 1);
 }
+
 
 
 /* .logo {
