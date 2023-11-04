@@ -9,13 +9,14 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // useState
 import './App.css'
-import Button from './component/button'
+import Button from './component/Button'
 
 import HttpClient from './helper/httpClient';
 const client = new HttpClient();
 
 function App() {
   const [apiKey, setApiKey] = useState(localStorage.getItem("apiKey"));
+  const [contenTodo, setContenTodo] = useState('');
 
   const [filters, setFilters] = useState({
     apiKey: apiKey,
@@ -99,42 +100,39 @@ function App() {
   ]
 
 
-  function handleWriteNewContentTodo(event) {
-    console.log('event', event.target.value);
-  }
+     // ADD Todo
+     async function handleAddTodo() {
+          console.log('handleAddTodo');
+          const body = {
+               todo: contenTodo,
+          }
 
-  function handleEditContentTodo(event) {
-    console.log('event', event.target.value);
+          const { data} = await client.post('/todos', body, apiKey);
+          const { code, data: dataAddTodo} = data;
+          console.log('code', code);
+          console.log('dataAddTodo', dataAddTodo);
+     }
 
-  }
+     function handleEditContentTodo(event) {
+          ('event', event.target.value);
+     }
 
-  async function handleAddTodo() {
-    const todo = {
+     async function handleEditTodo(id) {
+          ('handleEditTodo', id);
+     }
 
-    }
-    console.log('handleAddTodo');
-    const { data} = await client.post('/todos', todo, apiKey);
-    const { code, data: dataAddTodo} = data;
-    console.log('code', code);
-    console.log('dataAddTodo', dataAddTodo);
-
-  }
-  async function handleEditTodo(id) {
-    console.log('handleEditTodo', id);
-  }
-
-  async function handleChangeStatusTodo(id) {
-    console.log('handleChangeStatusTodo', id);
-  }
-  async function handleDeleteTodo(id) {
-    console.log('handleDeleteTodo', id);
-  }
-  async function handleExitEditTodo(id) {
-    console.log('handleExitEditTodo', id);
-  }
-  async function handleUpdateTodo(id) {
-    console.log('handleUpdateTodo', id);
-  }
+     async function handleChangeStatusTodo(id) {
+          ('handleChangeStatusTodo', id);
+     }
+     async function handleDeleteTodo(id) {
+          ('handleDeleteTodo', id);
+     }
+     async function handleExitEditTodo(id) {
+          ('handleExitEditTodo', id);
+     }
+     async function handleUpdateTodo(id) {
+          ('handleUpdateTodo', id);
+     }
 
   return (
     <>
@@ -150,9 +148,12 @@ function App() {
             {/*  */}
             <div className="todo-app-react__functions">
               <div className="function-add">
-                <input type="text" placeholder='Thêm một việc làm mới' onChange={(event) => handleEditContentTodo(event)} />
+                <input
+                    type="text" placeholder='Thêm một việc làm mới' value={contenTodo}
+                    onChange={(event) => setContenTodo(event.target.value)}
+                />
 
-                <Button onClick={handleAddTodo()} text="Thêm mới" className="btn-add" />
+                <Button onClick={handleAddTodo} text="Thêm mới" className="btn-add" />
               </div>
             </div>
             {/*  */}
@@ -165,7 +166,7 @@ function App() {
                     <div className="work-item__input">
                       <input
                         type="text" className={item.status_complete ? 'line-through' : '' }
-                        onChange={(event) => handleWriteNewContentTodo(event)}
+                        onChange={(event) => handleEditContentTodo(event)}
                       />
                     </div>
                     {/*  */}

@@ -186,6 +186,10 @@ input[type=radio] {
   color: #000;
 }
 
+.work-status span {
+  
+}
+
 .input-radio {
   /* border: 1px solid red; */
   width: 100%;
