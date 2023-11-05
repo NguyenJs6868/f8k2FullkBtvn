@@ -1,25 +1,26 @@
 // eslint-disable-next-line react-hooks/exhaustive-deps
+import './App.scss'
+import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react'
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 import Loading from './component/loading/Loading';
-import './App.scss'
 import Button from './component/Button'
 
 import HttpClient from './helper/httpClient';
 const client = new HttpClient();
 
+let loadding = true;
 function App() {
-  const [loadding, setLoadding] = useState(true);
-  const [apiKey, setApiKey] = useState(localStorage.getItem("apiKey"));
+  // const [loadding, setLoadding] = useState(true);
+  const [apiKey] = useState(localStorage.getItem("apiKey"));
   const [contenTodo, setContenTodo] = useState('To do ');
+  const [searchTodo, setSearchTodo] = useState('');
+  const [queryTodo, setQueryTodo] = useState('');
+
 
   const [listTodo, setListTodo] = useState([]);
-
-     const [filters, setFilters] = useState({
-          querry: "",
-     });
 
 
   useEffect(() => {
@@ -31,6 +32,7 @@ function App() {
     } else {
       if (emailLocal){
         toast(`Chào mừng bạn  ${emailLocal}`);
+        getTodos();
       } else {
         window.alert('Bạn cần nhập email để tiếp tục');
         localStorage.clear();
@@ -41,10 +43,11 @@ function App() {
 
   useEffect(() => {
     if (apiKey) {
-      getTodos(apiKey);
+      getTodos();
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filters]);
+  }, [queryTodo]);
 
      // Gọi API Key
      async function getApiKey() {
@@ -63,59 +66,49 @@ function App() {
                toast(`Chào mừng bạn`);
           }
      }
-      // xây form -> có action
-      // xây dựng hàm post truyền vào todo và api key,
-      // xây hàm delete truyền vào apikey và id của item todo
-      // xây hàm patch truyền vào todo hoặc is completeed hoặc cả hai
-
-      //   async function deleteTodo() {
-      //     console.log('delete');
-      //   };
 
      // Get list Todo
-      const getTodos = async (apiKey) => {
-        setLoadding(true);
-        const { data, res } = await client.get('/todos', {}, apiKey);
+      const getTodos = async () => {
+        loadding = true;
+        const { data, res } = await client.get(`/todos?q=${queryTodo}`, {}, apiKey);
         if (res.status === 200) {
           const { listTodo } = data.data
+          console.log('listTodo', listTodo);
+          setListTodo([]);
           setListTodo(listTodo);
-          setLoadding(false);
+          loadding = false;
         } else if (res.status === 401) {
-          setLoadding(false);
+          loadding = false;
           getApiKey();
         }
       };
+      // Search
+      async function handleSearchTodo(event) {
+        setSearchTodo(event.target.value);
+        setQueryTodo('')
+        setTimeout( function() {
+          setQueryTodo(event.target.value);
+        }, 1000);
 
-     // const listTodo = [
-     //      {
-     //           id: 1,
-     //           content: 'Todo 1',
-     //           // status_complete: true,
-     //           status_complete: false,
-     //           // editting: true,
-     //           editting: false,
-     //      },
-     //      {
-     //           id: 2,
-     //           content: 'Todo 2',
-     //           status_complete: false,
-     //           editting: true,
-     //      }
-     // ]
-
+      }
+      // useDebounce
 
      // ADD Todo
      async function handleAddTodo() {
-          console.log('handleAddTodo');
-          const body = {
-               todo: contenTodo,
-          }
+        const body = {
+              todo: contenTodo,
+        }
+        const { res, data } = await client.post('/todos', body, {}, apiKey);
+        console.log('res', res);
+        console.log('data', data);
+        if (res.status === 201 || data.code === 200) {
+            toast(data?.message);
+            setContenTodo('');
+            getTodos();
+        } else if (res.status === 401) {
+            getApiKey();
+        }
 
-          const { data } = await client.post('/todos', body, apiKey);
-          // const { code, data: dataAddTodo} = data;
-
-          console.log('data', data);
-          // console.log('dataAddTodo', dataAddTodo);
      }
 
      function handleEditContentTodo(event) {
@@ -135,13 +128,22 @@ function App() {
           // }
      }
      async function handleDeleteTodo(id) {
-          ('handleDeleteTodo', id);
-     }
+        const { res, data } = await client.delete(`/todos/${id}`, '', apiKey);
+        console.log('handleDeleteTodo res', res);
+            if (res.status === 200) {
+                toast(data.message)
+                getTodos();
+            }
+        }
      async function handleExitEditTodo(id) {
           ('handleExitEditTodo', id);
      }
      async function handleUpdateTodo(id) {
-          ('handleUpdateTodo', id);
+        const body ={
+            todo: 'update',
+        }
+        const res = await client.patch('/todos', body, apiKey);
+            ('handleUpdateTodo res,id: ', res, id);
      }
 
   return (
@@ -149,12 +151,11 @@ function App() {
     <Loading status={loadding}/>
 
     <div className="todo-app-react">
-      <div className="container">
-        <div className="todo-app-react-frame">
+    <div className="todo-app-react-frame">
           <div className="todo-app-react-wrap">
 
             <div className="todo-app-react__title">Welcome to Todo App</div>
-            {/*  */}
+            {/* Thêm mới */}
             <div className="todo-app-react__functions">
               <div className="function-add">
                 <input
@@ -165,45 +166,58 @@ function App() {
                 <Button onClick={handleAddTodo} text="Thêm mới" className="btn-add" />
               </div>
             </div>
-            {/*  */}
+            {/* Tìm kiếm */}
+            <div className='search-work'>
+              <input
+                className="input-filter"
+                placeholder="Tìm kiếm todo..."
+                type="text" value={searchTodo}
+                onChange={(event) => handleSearchTodo(event)}
+              />
+            </div>
+            {/* Danh sách việc cần làm */}
             <div className="todo-app-react__list-work">
               {
                listTodo ?
-               listTodo.map((item, index) => (
+               listTodo.map((item) => (
 
-                    <div key={index + 1} className="work-item">
+                    <div key={item._id} className="work-item">
 
                       <div className="work-item__input">
                         <input
-                          type="text" className={item.isCompleted ? 'line-through' : '' } defaultValue={item.todo}
-                          onChange={(event) => handleEditContentTodo(event)}
+                          type="text" className={item.isCompleted ? 'line-through' : '' }
+                          value={item.todo}
+                          onChange={() => handleEditContentTodo(item.todo)}
+                          readOnly={item.editting ? false : true}
                         />
+                       {/* <div>{item.todo}</div> */}
+
                       </div>
                       {/*  */}
                       <div className="work-item__action-btn">
 
                         {item.editting ?
                         <div className="status-preview">
-                          <Button onClick={() => handleEditTodo(item.id)} text="Sửa" className="btn-edit" />
-                          <Button onClick={() => handleDeleteTodo(item.id)} text="Xóa" className="btn-del" />
+                          <Button onClick={() => handleEditTodo(item._id)} text="Sửa" className="btn-edit" />
+                          <Button onClick={() => handleDeleteTodo(item._id)} text="Xóa" className="btn-del" />
                         </div>
                         :
                         <div className="status-edit">
 
                           <div className="work-status">
-                            <label htmlFor="completed" onClick={() => handleChangeStatusTodo(item.id)} >
+                            <label htmlFor="completed" onClick={() => handleChangeStatusTodo(item._id)} >
                               { item.isCompleted ? 'Completed ' : 'Not completed' }
                             </label>
 
-                            <input id="completed" type="checkbox" defaultChecked={true} onClick={() => handleChangeStatusTodo(item.id)}/>
+                            <input id="completed" type="checkbox" defaultChecked={item.isCompleted} onClick={() => handleChangeStatusTodo(item.isCompleted)}/>
                             {/* !item.isCompleted */}
                           </div>
 
 
                           <div className="status-edit__action-btn">
-                            <Button onClick={() => handleExitEditTodo(item.id)} text="Thoát" className="btn-exit" />
-                            <Button onClick={() => handleUpdateTodo(item.id)} text="Update" className="btn-update" />
-                            <Button onClick={() => handleDeleteTodo(item.id)} text="Xóa" className="btn-del" />
+                            <Button onClick={() => handleExitEditTodo(item._id)} text="Thoát" className="btn-exit" />
+                            <Button onClick={() => handleUpdateTodo(item._id)} text="Update" className="btn-update" />
+                            <Button onClick={() => handleDeleteTodo(item._id)} text="Xóa" className="btn-del" />
                           </div>
                         </div>
                         }
@@ -226,7 +240,6 @@ function App() {
             {/*  */}
           </div>
         </div>
-      </div>
     </div>
 
     <ToastContainer />
@@ -261,3 +274,14 @@ export default App
   <p className="read-the-docs">
     Click on the Vite and React logos to learn more
   </p> */}
+
+
+
+     // xây form -> có action
+      // xây dựng hàm post truyền vào todo và api key,
+      // xây hàm delete truyền vào apikey và id của item todo
+      // xây hàm patch truyền vào todo hoặc is completeed hoặc cả hai
+
+      //   async function deleteTodo() {
+      //     console.log('delete');
+      //   };
