@@ -3,6 +3,7 @@
   /* border: 1px solid red; */
   width: 100%;
   height: 100%;
+  padding: 2rem 0;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -17,7 +18,8 @@
 
 .todo-app-react-frame {
   /* border: 1px solid blue; */
-  width: 100%;
+  background: #334155;
+  width: 78%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,10 +28,9 @@
 }
 
 .todo-app-react-wrap {
-  /* border: 1px solid red; */
-  background: #334155;
+  // border: 1px solid red;
   width: 100%;
-  min-width: 576px;
+  max-width: 768px;
   flex-direction: column;
   flex-direction: row;
   justify-content: center;
@@ -67,7 +68,8 @@
 }
 
 .function-add {
-  /* border: 1px solid red; */
+  border-bottom: 1px solid rgb(20 184 166);
+  max-width: 384px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -258,28 +260,12 @@ input[type=radio] {
 
 /* btn */
 button {
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
   border-radius: 4px;
   transition: all 0.3s ease;
   font-weight: 600;
-}
 
-button:hover {
-  opacity: 0.6;
-  cursor: pointer;
-}
-button:active {
-  opacity: 1;
-}
-
-.btn-add {
-   background: #14B8A6;
-}
-
-button {
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
   transition: all 0.3s ease;
   color: #fff;
   font-weight: 600;
@@ -292,6 +278,10 @@ button:hover {
 }
 button:active {
   opacity: 1;
+}
+
+.btn-add {
+   background: #14B8A6;
 }
 
 .btn-add, .btn-update, .btn-edit  {

@@ -14,8 +14,8 @@ const client = new HttpClient();
 let loadding = true;
 function App() {
   // const [loadding, setLoadding] = useState(true);
-  const [apiKey] = useState(localStorage.getItem("apiKey"));
-  const [contenTodo, setContenTodo] = useState('To do ');
+  const [apiKey, setApiKey] = useState(localStorage.getItem("apiKey"));
+  const [contenTodo, setContenTodo] = useState('');
   const [searchTodo, setSearchTodo] = useState('');
   const [queryTodo, setQueryTodo] = useState('');
 
@@ -31,8 +31,8 @@ function App() {
       getApiKey();
     } else {
       if (emailLocal){
-        toast(`Chào mừng bạn  ${emailLocal}`);
         getTodos();
+        toast(`Chào mừng bạn  ${emailLocal}`);
       } else {
         window.alert('Bạn cần nhập email để tiếp tục');
         localStorage.clear();
@@ -47,7 +47,7 @@ function App() {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [queryTodo]);
+  }, [queryTodo, apiKey]);
 
      // Gọi API Key
      async function getApiKey() {
@@ -63,14 +63,16 @@ function App() {
                const { apiKey } = dataGetApiKey;
                localStorage.setItem("apiKey", apiKey);
                localStorage.setItem("email", email);
+               setApiKey(apiKey);
                toast(`Chào mừng bạn`);
           }
      }
 
      // Get list Todo
       const getTodos = async () => {
+        console.log('Gọi hàm getTodos');
         loadding = true;
-        const { data, res } = await client.get(`/todos?q=${queryTodo}`, {}, apiKey);
+        const { data, res } = await client.get(`/todos?q=${queryTodo ? queryTodo : ''}`, {}, apiKey);
         if (res.status === 200) {
           const { listTodo } = data.data
           console.log('listTodo', listTodo);
