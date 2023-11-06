@@ -268,7 +268,7 @@ button {
   border: none;
   transition: all 0.3s ease;
   color: #fff;
-  font-weight: 600;
+  font-weight: 700;
   user-select: none;
 }
 
@@ -290,7 +290,7 @@ button:active {
 .btn-completed {
   background: #14B8A6;
 }
-.btn-exit {
+.btn-exit, .btn-search {
   background: rgba(249,115,22);
 }
 .btn-del {

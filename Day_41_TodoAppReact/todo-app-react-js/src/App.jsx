@@ -7,15 +7,17 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import Loading from './component/loading/Loading';
 import Button from './component/Button'
+// import TodoItem from './component/TodoItem';
+
 
 import HttpClient from './helper/httpClient';
 const client = new HttpClient();
 
-let loadding = true;
+// let loadding = false;
 function App() {
-  // const [loadding, setLoadding] = useState(true);
-  const [apiKey, setApiKey] = useState(localStorage.getItem("apiKey"));
-  const [contenTodo, setContenTodo] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [apiKeyValue, setApiKeyValue] = useState(localStorage.getItem("apiKey") ?? '');
+  const [contenTodo, setContentTodo] = useState('');
   const [searchTodo, setSearchTodo] = useState('');
   const [queryTodo, setQueryTodo] = useState('');
 
@@ -23,67 +25,115 @@ function App() {
   const [listTodo, setListTodo] = useState([]);
 
 
+//   useEffect(() => {
+//     const apiKeyLocal =  localStorage.getItem("apiKey");
+//     const emailLocal =  localStorage.getItem("email");
+//     // Chưa có
+//     if (!apiKeyLocal) {
+//       getApiKey();
+//     } else {
+//       if (emailLocal){
+//         // getTodos();
+//         toast(`Chào mừng bạn  ${emailLocal}`);
+//       } else {
+//         window.alert('Bạn cần nhập email để tiếp tục');
+//         localStorage.clear();
+//         window.location.reload();
+//       }
+//     }
+//   }, []);
+
+//  Kiểm tra token và name
   useEffect(() => {
-    const apiKeyLocal =  localStorage.getItem("apiKey");
-    const emailLocal =  localStorage.getItem("email");
-    // Chưa có
-    if (!apiKeyLocal) {
-      getApiKey();
-    } else {
-      if (emailLocal){
+    if (checkAPiKeyEmail()) {
+        console.log("Có apiKeyLocal có thông tin rồi -> get list", checkAPiKeyEmail());
         getTodos();
-        toast(`Chào mừng bạn  ${emailLocal}`);
-      } else {
-        window.alert('Bạn cần nhập email để tiếp tục');
-        localStorage.clear();
-        window.location.reload();
-      }
+    } else {
+        console.log('Mất apiKeyLocal');
+        getApiKey();
     }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (apiKey) {
-      getTodos();
-    }
+    // const checkLogin = async () => {
+    //     const getAllTodoResult = await getAllTodo();
+    //         if (!getAllTodoResult.data) {
+    //             return false;
+    //         }
+    //         return true;
+    // }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [queryTodo, apiKey]);
+    function checkAPiKeyEmail() {
+        console.log('checkAPiKeyEmail');
+        const apiKeyLocal =  localStorage.getItem("apiKey");
+        const emailLocal =  localStorage.getItem("email");
+
+        if (apiKeyLocal || emailLocal) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
      // Gọi API Key
      async function getApiKey() {
-          let email = window.prompt("Please enter your email", "example@example.com");
-          if (!email) {
-               window.alert('Bạn cần nhập email để tiếp tục');
-               window.location.reload();
-          }
 
-          const { data} = await client.get('/api-key', {email});
-          const { code, data: dataGetApiKey} = data
-          if (code === 200) {
-               const { apiKey } = dataGetApiKey;
-               localStorage.setItem("apiKey", apiKey);
-               localStorage.setItem("email", email);
-               setApiKey(apiKey);
-               toast(`Chào mừng bạn`);
-          }
+        let email = window.prompt("Please enter your email", "example@example.com");
+        //   if (!email) {
+        //        window.alert('Bạn cần nhập email để tiếp tục');
+        //        window.location.reload();
+        //   }
+
+        const { data} = await client.get('/api-key', {email});
+        const { code, data: dataGetApiKey} = data
+        console.log('getApiKey code', code);
+
+        if (code === 200) {
+            const { apiKey } = dataGetApiKey;
+            localStorage.removeItem('apiKey');
+            localStorage.removeItem('email');
+            localStorage.setItem("apiKey", apiKey);
+            localStorage.setItem("email", email);
+            setApiKeyValue(apiKey); // Chậm !
+            getTodos(); // !
+            toast(`Chào mừng bạn ${ (email.split('@'))[0] }`);
+        }  else if (code === 400) {
+            toast(dataGetApiKey.message || `Bạn cần nhập lại đúng email`);
+            window.location.reload();
+        } else {
+            toast(dataGetApiKey.message);
+        }
      }
 
+     useEffect(() => {
+        getTodos();
+      }, [queryTodo]);
+
      // Get list Todo
-      const getTodos = async () => {
-        console.log('Gọi hàm getTodos');
-        loadding = true;
-        const { data, res } = await client.get(`/todos?q=${queryTodo ? queryTodo : ''}`, {}, apiKey);
-        if (res.status === 200) {
-          const { listTodo } = data.data
-          console.log('listTodo', listTodo);
-          setListTodo([]);
-          setListTodo(listTodo);
-          loadding = false;
-        } else if (res.status === 401) {
-          loadding = false;
-          getApiKey();
+    const getTodos = async () => {
+        setLoading(true);
+        // const { data, res } = await client.get(`/todos?q=${queryTodo ? queryTodo : ''}`, {});
+        const apiKeyLocal =  localStorage.getItem("apiKey");
+        if (apiKeyLocal) {
+            const { data, res } = await client.get(`/todos?q=${queryTodo}`, {}, apiKeyLocal);
+            if (res.status === 200) {
+                const { listTodo } = data.data
+                console.log('getTodos 200', listTodo);
+                setListTodo([]);
+                setListTodo(listTodo);
+                setLoading(false);
+            } else if (res.status === 401) {
+                setLoading(false);
+                toast(data.message)
+            //   getApiKey();
+            }
         }
-      };
+
+    };
+//         function handleSearch() {
+//
+//         }
       // Search
       async function handleSearchTodo(event) {
         setSearchTodo(event.target.value);
@@ -97,20 +147,28 @@ function App() {
 
      // ADD Todo
      async function handleAddTodo() {
+        console.log('Chạy hàm handleAddTodo');
+
         const body = {
-              todo: contenTodo,
+            todo: contenTodo,
         }
-        const { res, data } = await client.post('/todos', body, {}, apiKey);
+        const { res, data } = await client.post('/todos', body, {}, apiKeyValue);
         console.log('res', res);
         console.log('data', data);
         if (res.status === 201 || data.code === 200) {
             toast(data?.message);
-            setContenTodo('');
+            setContentTodo('');
             getTodos();
+        } else if (res.status === 400) {
+            toast(data?.message || 'Todo không được phép trống');
         } else if (res.status === 401) {
+            toast(data?.message ?? 'Unauthorize');
+            localStorage.removeItem('apiKey');
+            localStorage.removeItem('email');
             getApiKey();
+        } else {
+            toast(data?.message);
         }
-
      }
 
      function handleEditContentTodo(event) {
@@ -130,11 +188,14 @@ function App() {
           // }
      }
      async function handleDeleteTodo(id) {
-        const { res, data } = await client.delete(`/todos/${id}`, '', apiKey);
-        console.log('handleDeleteTodo res', res);
+        const { res, data } = await client.delete(`/todos/${id}`, '', apiKeyValue);
+            console.log('handleDeleteTodo res', res);
+            setLoading(true);
             if (res.status === 200) {
                 toast(data.message)
-                getTodos();
+                getTodos().finally(() => {
+                    setLoading(false);
+                });
             }
         }
      async function handleExitEditTodo(id) {
@@ -144,13 +205,13 @@ function App() {
         const body ={
             todo: 'update',
         }
-        const res = await client.patch('/todos', body, apiKey);
+        const res = await client.patch('/todos', body, apiKeyValue);
             ('handleUpdateTodo res,id: ', res, id);
      }
 
   return (
     <>
-    <Loading status={loadding}/>
+    <Loading status={loading}/>
 
     <div className="todo-app-react">
     <div className="todo-app-react-frame">
@@ -162,11 +223,12 @@ function App() {
               <div className="function-add">
                 <input
                     type="text" placeholder='Thêm một việc làm mới' value={contenTodo}
-                    onChange={(event) => setContenTodo(event.target.value)}
+                    onChange={(event) => setContentTodo(event.target.value)}
                 />
 
                 <Button onClick={handleAddTodo} text="Thêm mới" className="btn-add" />
-              </div>
+            </div>
+            <Button  text="Tìm kiếm" className="btn-search" />
             </div>
             {/* Tìm kiếm */}
             <div className='search-work'>
@@ -174,7 +236,7 @@ function App() {
                 className="input-filter"
                 placeholder="Tìm kiếm todo..."
                 type="text" value={searchTodo}
-                onChange={(event) => handleSearchTodo(event)}
+                onChange={handleSearchTodo}
               />
             </div>
             {/* Danh sách việc cần làm */}
