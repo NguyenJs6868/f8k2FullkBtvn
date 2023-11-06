@@ -116,6 +116,7 @@ function App() {
         // const { data, res } = await client.get(`/todos?q=${queryTodo ? queryTodo : ''}`, {});
         const apiKeyLocal =  localStorage.getItem("apiKey");
         if (apiKeyLocal) {
+            console.log('có apiKeyLocal :', apiKeyLocal);
             const { data, res } = await client.get(`/todos?q=${queryTodo}`, {}, apiKeyLocal);
             if (res.status === 200) {
                 const { listTodo } = data.data
@@ -125,8 +126,8 @@ function App() {
                 setLoading(false);
             } else if (res.status === 401) {
                 setLoading(false);
-                toast(data.message)
-            //   getApiKey();
+                toast(`${data.message} + API key gửi lên sai hoặc tk đăng nhập nhiều app tab khác`)
+                getApiKey();
             }
         }
 
