@@ -4,11 +4,11 @@ import HttpClient from "../configs/client";
 
 const client = new HttpClient();
 
-async function getProfile() {
-	// [GET : /users/profile] Dùng để lấy ra thông tin user
-	const apiKeyLocal = localStorage.getItem("apiKey");
-	if (apiKeyLocal) {
-		const { res, data } = await client.get(endpoint.profile, {}, apiKeyLocal);
+async function getProfile(apiKey) {
+
+
+	if (apiKey) {
+		const { res, data } = await client.get(endpoint.profile, {}, apiKey);
 
     if (res.ok) {
       return data.data;

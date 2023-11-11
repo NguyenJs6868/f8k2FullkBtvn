@@ -4,7 +4,7 @@
 
 //Lấy dispatch của context
 //  -> useDispatch()
-import { ProviderContext } from "../core/Provider";
+import { ProviderContext } from "./Provider";
 import { useContext } from "react";
 export const useSelector = () => {
   const { state } = useContext(ProviderContext);
