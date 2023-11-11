@@ -4,7 +4,7 @@ import ItemRow from "../ItemRow";
 
  function CartList() {
     return (
-        <frameElement>
+        <>
             <div className="shop-page-cart-layout">
                 <div className="shop-page-cart-layout__table-infor">
 
@@ -33,7 +33,7 @@ import ItemRow from "../ItemRow";
 
 
               </div>
-        </frameElement>
+        </>
     )
 }
 

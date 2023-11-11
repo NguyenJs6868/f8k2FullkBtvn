@@ -1,23 +1,31 @@
 // import React from 'react'
 import ProductItem from "../ProductItem";
 
- function ProductList() {
+ function ProductList({productList}) {
+
+  console.log('Component ProductList', productList, typeof productList);
+  // const [ ]
+
+
     return (
-        <frameElement>
+        <>
           <div className="shop-page-product-layout">
             <div className="shop-page-products-layout__title">
               <span>Welcome to Shop!</span>
             </div>
 
             <div className="shop-page-products-layout__products-grid">
-              <ProductItem />
-              <ProductItem />
-              <ProductItem />
-              <ProductItem />
-
+              { productList ?
+                productList.map((item) => {
+                  console.log('item', item)
+                  return <ProductItem key={item._id} item={item}/>
+                })
+                :
+                ''
+              }
             </div>
           </div>
-        </frameElement>
+        </>
     )
 }
 

@@ -276,9 +276,9 @@
 }
 
 .login-page {
-  // border: 1px solid red;
+  border: 1px solid gray;
+  background: rgb(209 209 209);
   border-radius: 0.5rem;
-  background: #fff;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -294,7 +294,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-  display: none;
+  // display: none;
 }
 
 .login-page__label {
