@@ -1,0 +1,128 @@
+$cart: #005b41;
+$price: #9d174d;
+
+.product-list-page {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 0rem;
+
+}
+
+.product-list__title {
+	font-weight: 600;
+	margin: 0.75rem 0;
+}
+
+.product-list__category {
+	// border: 1px solid blue;
+	width: 100%;
+	display: flex;
+	// grid-template-columns: auto auto auto auto;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+	padding: 1rem 0;
+}
+
+.product-item {
+	box-shadow: 0 0 3px #252b48;
+	border-radius: 1rem;
+	word-break: break-word;
+	// max-width: 30%;
+	width: 240px;
+	padding: 1rem 1.25rem;
+	display: flex;
+	flex-direction: column;
+
+	position: relative;
+	user-select: none;
+}
+
+.product-item__img {
+	border-radius: inherit;
+	width: 100%;
+	height: 84px;
+
+	& img {
+		border-radius: inherit;
+		width: 100%;
+		height: 100%;
+		transition: all 0.1s ease-in-out !important;
+	}
+
+	& img:hover {
+		transform: scale(120%);
+	}
+}
+
+.product-item__name {
+	margin-top: 0.5rem;
+	font-weight: 600;
+	font-size: 1.1rem;
+}
+
+.product-item__price {
+	margin-top: 0.5rem;
+	font-size: 1.8rem;
+
+	& span:first-child {
+		color: $price;
+		font-weight: 700;
+		margin-right: 0.15rem;
+	}
+
+	& span:nth-child(2) {
+		color: #000;
+		font-weight: 600;
+	}
+
+}
+
+.product-item__action {
+	width: 100%;
+	border: 1px solid $cart;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: $cart;
+	font-weight: 700;
+	padding: 0 !important;
+
+	&>button {
+		font-size: 20px;
+		// position: absolute;
+		// right: 0.75rem;
+		// bottom: 1.15rem;
+		// color: $cart;
+	}
+}
+
+
+@media only screen and (max-width: 768px) {
+	.product-list__category {
+		grid-template-columns: auto auto auto;
+		gap: 0.75rem;
+		padding: 0.75rem 0;
+	}
+}
+
+@media only screen and (max-width: 576px) {
+	.product-list__category {
+		grid-template-columns: auto auto;
+		gap: 0.5rem;
+		padding: 0.5rem 0;
+	}
+}
+
+@media only screen and (max-width: 320px) {
+	.product-list__category {
+		grid-template-columns: auto;
+		gap: 0.25rem;
+		padding: 0.25rem 0;
+	}
+}

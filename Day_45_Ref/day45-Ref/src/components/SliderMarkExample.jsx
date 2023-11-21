@@ -6,23 +6,13 @@ import {
 	SliderThumb,
 	SliderTrack
 } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useDispatch, useSelector } from '../core/hook';
 
 function SliderMarkExample() {
-	const [sliderValue, setSliderValue] = useState(100);
-	const [converNumber, setConverNumber] = useState(0);
-
-	function setRangeNumber() {
-		if (sliderValue) {
-			const valueNumber = Math.ceil(2048 * (sliderValue / 100));
-			setConverNumber(Number(valueNumber));
-			console.log('sliderValue: ', sliderValue);
-		}
-	}
-
-	useEffect(() => {
-		setRangeNumber();
-	}, [sliderValue]);
+	const [sliderValue, setSliderValue] = useState();
+const dipatch = useDispatch();
+const state = useSelector();
 
 	const labelStyles = {
 		mt: '2',
@@ -30,29 +20,41 @@ function SliderMarkExample() {
 		fontSize: 'sm'
 	};
 
+	// console.log(sliderValue);
+
+
+
 	return (
 		<div className="ranger-controler">
 			<Box pt={6} pb={2}>
 				<Slider
 					aria-label="slider-ex-6"
 					onChange={val => setSliderValue(val)}
+
+					onChangeEnd={(val) => dipatch({
+						type: "range/change",
+						payload: val,
+					})}
+
+					defaultValue={state.rangeNumber}
+					min={2}
+					max={2048}
 				>
-					<SliderMark value={20} {...labelStyles}>
+					<SliderMark value={100} {...labelStyles}>
 						100
 					</SliderMark>
-					<SliderMark value={40} {...labelStyles}>
+					<SliderMark value={512} {...labelStyles}>
 						512
 					</SliderMark>
-					<SliderMark value={60} {...labelStyles}>
+					<SliderMark value={1024} {...labelStyles}>
 						1024
 					</SliderMark>
-					<SliderMark value={80} {...labelStyles}>
+					<SliderMark value={1536} {...labelStyles}>
 						1536
 					</SliderMark>
-					<SliderMark value={100} {...labelStyles}>
+					<SliderMark value={2048} {...labelStyles}>
 						2048
 					</SliderMark>
-
 					<SliderMark
 						value={sliderValue}
 						textAlign="center"
@@ -62,8 +64,9 @@ function SliderMarkExample() {
 						ml="-5"
 						w="12"
 					>
-						{converNumber}
+						{sliderValue}
 					</SliderMark>
+
 					<SliderTrack>
 						<SliderFilledTrack />
 					</SliderTrack>

@@ -1,12 +1,45 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import React from 'react';
 
+const serviceId = import.meta.env.VITE_ID_SERVICE_EMAILJS
+const templateId = import.meta.env.VITE_ID_TEMPLATE_EMAILJS
+const apiKeys = import.meta.env.VITE_KEY_EMAILJS
+
 function AuthEmailjs() {
 	const { user, isAuthenticated, isLoading } = useAuth0();
-	console.log('Đã vào Profile');
+	console.log('user, isAuthenticated, isLoading', user, isAuthenticated, isLoading);
+	console.log('Đã vào Profile - AuthEmailjs');
+
 	const { logout } = useAuth0();
 
-	if (isLoading) {
+	const [loading, setLoading] = useState(false);
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setLoading(true);
+		emailjs
+				.sendForm(
+						serviceId,
+						templateId,
+						e.target,
+						apiKeys
+				)
+				.then(
+						(response) => {
+								setLoading(false);
+								console.log('SUCCESS!', response.status, response.text);
+								toast.success(`Gửi thành công !`);
+						},
+						(err) => {
+								setLoading(false);
+								console.log('FAILED...', err);
+								toast.error(`Gửi thất bại !`);
+						}
+				);
+};
+
+
+	if (isLoading || loading) {
 		return <div>Loading ...</div>;
 	}
 
@@ -46,22 +79,29 @@ function AuthEmailjs() {
 									</div>
 								</div>
 
-								<div className="form-input">
+								<form action="" onSubmit={handleSubmit} className="form-input">
+									<label htmlFor="email">Email của bạn* </label>
 									<input
 										type="text"
+										name="email"
+										id="email"
 										className="form-input__your-email"
 										placeholder="Email của bạn *"
 										defaultValue="nguyentrungnguyenth14@gmail.com"
 									/>
+
+									<label htmlFor="message">Tin nhắn </label>
 									<textarea
+										name="message"
+										id="message"
 										className="form-input-message"
 										type="text"
 										placeholder="Tin nhắn *"
 										defaultValue={`Tôi cần trợ giúp bài tập về nhà!`}
 									/>
-								</div>
+								</form>
 
-								<button className="form-input__action">
+								<button type="submit" className="form-input__action">
 									<span>Yêu cầu hỗ trợ!</span>
 								</button>
 							</form>
@@ -80,6 +120,7 @@ function AuthEmailjs() {
 							</button>
 						</div>
 					</div>
+
 				</div>
 			)}
 		</>
