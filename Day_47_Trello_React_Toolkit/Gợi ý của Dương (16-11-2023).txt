@@ -1,0 +1,27 @@
+Nguyễn Dương
+6 ngày trước (16/11/2023)
+Hi anh, ở đây anh giúp em tạo ra 2 mảng. Mảng columns sẽ giúp anh lưu lại vị trí và sắp xếp mảng. Mảng thứ 2 sẽ là mảng lưu các task todo và 1 key sẽ lưu lại id của column nó đang đứng.
+
+Luồng chạy của nó là khi anh thêm 1 task ở column nào hay anh tạo một column nào thì anh lưu lại tương tự
+
+Tạo column thì anh push một obj mới vào columns
+Tạo task thì anh lưu thông tin task kèm với id của column
+Cái này anh có thể tham khảo tại localStorage của bài mẫu.
+
+Sau khi anh khởi tạo xong, anh xử lý kéo thả thì anh xử lý như nào là code của anh nhé!
+
+Sau khi kéo thả xong,
+
+Nếu anh thay đội vị trí task thì anh xoá từ column cũ và push vào column mới (Nhớ xử lý index để push đúng chỗ)
+
+Nếu anh thay đổi vị trí column thì anh dựa vào index của column để anh sort lại.
+
+Cuối cùng, sau khi kết thúc thay đổi (Anh có thể add debounce hay kỹ thuật nào đó để giảm tải thay đổi text hay thay đổi vị trí liên tục nhé)
+
+Anh post toàn bộ data lên server.
+
+Sau khi vào trang, anh nhớ get lại data từ trên server về nhé.
+
+Ở trong bài xử lý là lưu cả vào localStorage để lỡ mạng gặp bất cập gì, vẫn được lưu lại khi reload trang, sau đó khi vào trang lại hay kết nối lại mạng, anh có thể post lại và các task vẫn được lưu như anh mong muốn.
+
+Nếu có gì chưa hiểu anh có thể reply lại comment này nha. Thanks a

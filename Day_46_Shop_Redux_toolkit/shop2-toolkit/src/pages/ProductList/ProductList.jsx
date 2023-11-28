@@ -130,7 +130,6 @@ function ProductList() {
 										ADD CART <CartIcon />
 									</div>
 								</div>
-								;
 							</Fragment>
 						);
 					})}

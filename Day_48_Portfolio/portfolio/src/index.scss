@@ -1,0 +1,195 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+button,
+.btn {
+  // border: 1px solid red;
+  // border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  padding: 0.25rem 0.5rem;
+  outline: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &:hover {
+    opacity: 0.6;
+  }
+
+  &:active {
+    opacity: 1;
+  }
+
+  &:focus,
+  :focus-visible {
+    outline: none;
+    border: none;
+  }
+
+}
+
+//
+
+.portfolio-page {
+  // border: 1px solid red;
+  
+}
+
+.portfolio-container {
+  // border: 1px solid red;
+
+}
+
+.portfolio-wrap {
+  // border: 1px solid red;
+
+}
+
+.portfolio-head {
+  // border: 1px solid red;
+
+}
+
+.left {
+  // border: 1px solid red;
+
+}
+
+.icon {
+  // border: 1px solid red;
+
+}
+
+.website {
+  // border: 1px solid red;
+
+}
+
+.tabs {
+  // border: 1px solid red;
+
+}
+
+.Home {
+  // border: 1px solid red;
+
+}
+
+.right {
+  // border: 1px solid red;
+
+}
+
+.social-networks {
+  // border: 1px solid red;
+
+}
+
+.network-item {
+  // border: 1px solid red;
+
+}
+
+.actions {
+  // border: 1px solid red;
+
+}
+
+.change-theme {
+  // border: 1px solid red;
+
+}
+
+.change-language {
+  // border: 1px solid red;
+
+}
+
+.portfolio-main {
+  // border: 1px solid red;
+
+}
+
+.portfolio-basic-infor {
+  // border: 1px solid red;
+
+}
+
+.portfolio-basic-infor-avata {
+  // border: 1px solid red;
+
+}
+
+.portfolio-basic-infor-details {
+  // border: 1px solid red;
+
+}
+
+.Specialize {
+  // border: 1px solid red;
+
+}
+
+.item-infor {
+  // border: 1px solid red;
+
+}
+
+.item-infor__title {
+  // border: 1px solid red;
+
+}
+
+.item-infor__contents {
+  // border: 1px solid red;
+
+}
+
+.portfolio-main-infor {
+  // border: 1px solid red;
+
+}
+
+.portfolio-categories {
+  // border: 1px solid red;
+
+}
+
+.category-item {
+  // border: 1px solid red;
+
+}
+
+.category-item__title {
+  // border: 1px solid red;
+
+}
+
+.category-item__contents {
+  // border: 1px solid red;
+
+}
+
+.content-text {
+  // border: 1px solid red;
+
+}
+
+.content-actions {
+  // border: 1px solid red;
+
+}
+
+.portfolio-foo {
+  // border: 1px solid red;
+
+}
+t
