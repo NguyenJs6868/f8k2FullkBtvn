@@ -1,0 +1,41 @@
+.add-column {
+	border: transparent;
+	background-color: #48C5B5;
+	border-radius: 0.25rem;
+	max-width: calc(576px - 2rem);
+	min-width: calc(320px - 2rem);
+	width: 100%;
+	min-height: 40px;
+	height: fit-content;
+
+	display: flex;
+	// flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	cursor: pointer;
+
+
+  &>button {
+		height: 100%;
+		width: 100%;
+    display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		// gap: 0.15rem;
+  }
+
+	& span {
+		padding: 0.25rem;
+		color: #000;
+		font-size: 16px;
+	}
+	& span:nth-child(1) {
+		transform: translateY(2px);
+		font-size: 12px;
+	}
+	&:hover {
+		border: 1px solid green($color: #0D9488);
+	}
+}
+
