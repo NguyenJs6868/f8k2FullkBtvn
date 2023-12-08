@@ -1,3 +1,31 @@
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     --foreground-rgb: 255, 255, 255;
+//     --background-start-rgb: 0, 0, 0;
+//     --background-end-rgb: 0, 0, 0;
+//   }
+// }
+
+// body {
+//   color: rgb(var(--foreground-rgb));
+//   background: linear-gradient(
+//       to bottom,
+//       transparent,
+//       rgb(var(--background-end-rgb))
+//     )
+//     rgb(var(--background-start-rgb));
+// }
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   padding: 0;
@@ -29,6 +57,7 @@ button,
 
   &:focus,
   :focus-visible {
+
     outline: none;
     border: none;
   }
@@ -243,7 +272,7 @@ $main: #C77634;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.5rem;
 }
 
@@ -292,7 +321,8 @@ $main: #C77634;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1.5rem;
+  padding: 0 1rem;
 
   & div {
     width: 100%;
@@ -375,6 +405,14 @@ a {
   }
 
   .portfolio-basic-infor {
-    width: 100%;
+    max-width: max-content;
+    width: auto;
+  }
+  .portfolio-categories {
+    padding: 1rem;
+  }
+  .portfolio-categories div {
+    flex: 1;
+
   }
 }
