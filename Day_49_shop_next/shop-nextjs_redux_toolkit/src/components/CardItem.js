@@ -17,7 +17,7 @@ function CardItem() {
 
 					<p className="card-text">Paris-Kinh Đô Thời Trang Và Thành Phố Về Đêm</p>
 
-					<p Name="card-text">Chuyến Đi Dành Cho Gia Đình 5N/6Đ</p>
+					<p name="card-text">Chuyến Đi Dành Cho Gia Đình 5N/6Đ</p>
 
 					<div className='d-flex cart-item-vote'>
 						<i className="fa-solid fa-star btn-secondary"></i>

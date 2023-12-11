@@ -1,11 +1,16 @@
+//   category-detail
 import CategoryDetail from '@/pages/CategoryDetail';
-import React from 'react';
+import React, { Fragment } from 'react';
 
-function CategoryDetailPage() {
+async function CategoryDetailPage() {
+	const response = await fetch('https://api-pages.vercel.app/api/v1/pages/1');
+	const categoryDetail = await response.json();
+	// console.log('layout app', categoryDetail);
+
 	return (
-		<>
-			<CategoryDetail />
-		</>
+		<Fragment>
+			<CategoryDetail  item= {categoryDetail} />
+		</Fragment>
 	);
 }
 

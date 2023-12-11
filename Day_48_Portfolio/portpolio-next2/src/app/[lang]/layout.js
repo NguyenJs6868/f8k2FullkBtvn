@@ -9,7 +9,7 @@ export const metadata = {
   description: 'Portfolio',
 }
 export async function generateStaticParams() {
-  return [{ lang: 'en' }, { lang: 'vi' }]
+  return [{ lang: 'en' }, { lang: 'vi' }, { lang: 'ja' }]
 }
 
 export default function RootLayout({ children,params }) {

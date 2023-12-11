@@ -3,7 +3,7 @@ import React from 'react';
 function Nation() {
 	return (
 		<div>
-			<select class="form-select" aria-label="Default select example" id="nations" >
+			<select className="form-select" aria-label="Default select example" id="nations" >
 				<option value="American Samoa">American Samoa</option>
 				<option value="Angola">Angola</option>
 				<option value="Argentina">Argentina</option>

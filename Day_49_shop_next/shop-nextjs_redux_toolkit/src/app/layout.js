@@ -1,27 +1,39 @@
 // "use client"
+import { Inter } from 'next/font/google';
 
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import "./global.scss";
+import './global.scss';
+import { Providers } from './providers';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: "F8 - Học lập trình để đi làm", //title
-  description: "F8 chuyên đào tạo lập trình để đi làm", //meta description
-  robots: "nofollow, noindex",
-  openGraph: {
-    title: "F8 - Học lập trình để đi làm 1",
-    description: "F8 chuyên đào tạo lập trình để đi làm 1",
-    images: [
-      "https://fullstack.edu.vn/images/image01.jpg",
-      "https://fullstack.edu.vn/images/image02.jpg",
-    ],
-    url: "https://fullstack.edu.vn",
-    type: "website",
-  },
+	title: 'STRAVEL', //title
+	description: 'B49Shop Next Js ', //meta description
+	robots: 'nofollow, noindex',
+	openGraph: {
+		title: 'STRAVEL 1',
+		description: 'Booking your travle',
+		images: [
+			'https://fullstack.edu.vn/images/image01.jpg',
+			'https://fullstack.edu.vn/images/image02.jpg'
+		],
+		url: 'https://fullstack.edu.vn',
+		type: 'website'
+	}
 };
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  );
+
+
+export async function generateStaticParams() {
+	return [{ lang: 'en' }, { lang: 'vi' }];
+}
+
+export default function RootLayout({ children, params }) {
+	return (
+		//  style={{background: '#000'}}
+		<html lang="en">
+			<body className={inter.className} suppressHydrationWarning={true}>
+				<Providers>{children}</Providers>
+			</body>
+		</html>
+	);
 }

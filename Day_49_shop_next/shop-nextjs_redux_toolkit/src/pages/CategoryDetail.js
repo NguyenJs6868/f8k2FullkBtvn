@@ -1,9 +1,12 @@
 import React from 'react';
 import Button from '@/components/button/Button';
+import Link from 'next/link';
 
 // import Image from 'next/image';
 
-function CategoryDetail() {
+function CategoryDetail({item}) {
+	console.log('category in page', item);
+
 	return (
 		<div className="category-detail-page">
 
@@ -15,15 +18,16 @@ function CategoryDetail() {
 
 				<div className="category-detail-outlay">
 					<div className="category-detail-outlay-wrap">
-						<div className="category-detail-outlay__title">
-							Thành Phố Có Tất Cả
+						<div className="category-detail-outlay__title-name">
+							{item?.home?.name}
 						</div>
+
+						<div className="category-detail-outlay__title-content">
+							{item?.home?.content}
+						</div>
+
 						<div className="category-detail-outlay__desctription">
-							Mumbai Không Chỉ Là Trung Tâm Tài Chính – Kinh Tế, Kinh
-							Đô Điện Ảnh – Thời Trang Của Ấn Độ, Mà Đây Còn Là Thành
-							Phố Cảng Vừa Hiện Đại Nhưng Vẫn Mang Nhiều Nét Cổ Kính
-							Với Những Công Trình Kiến Trúc, Quán Bar, Nhà Hàng, Viện
-							Bảo Tàng Và Các Cửa Hàng Thời Trang Hấp Dẫn…
+							{item?.home?.textcontent}
 						</div>
 
 						<div className="category-detail-outlay__action">
@@ -36,7 +40,9 @@ function CategoryDetail() {
 			<div className="category-detail-book-now">
 				<span>Ưu Đãi 30.000.000 Cho 5người/3ngày</span>
 				<div className='category-detail-book-now-action'>
-					<Button text="Đặt ngay" style={{width: "100%"}} />
+					<Link href="/category-detail-book" style={{width: "100%"}} >
+						<Button text="Đặt ngay" style={{width: "100%"}} />
+					</Link>
 				</div>
 			</div>
 

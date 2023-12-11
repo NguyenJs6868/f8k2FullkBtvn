@@ -1,3 +1,6 @@
+// 'use client';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 import ForYou from '@/components/ForYou';
 import Advantages from '@/pages/Advantages';
 import Category from '@/pages/Category';
@@ -8,26 +11,31 @@ import Footer from '@/pages/Footer';
 import Header from '@/pages/Header';
 import Service from '@/pages/Service';
 import 'bootstrap/dist/css/bootstrap.css';
+// import { useTheme } from 'next-themes';
 
-const Home = () => {
-	const projectDir = process.cwd();
+const Home = async () => {
+	// const projectDir = process.cwd();
+
+
 	return (
-		<div>
+		<main className='dark:bg-black'>
 			<Header />
-			<FindDeals />
+			{/* <FindDeals /> */}
 			<ForYou />
-			<Advantages />
-			<Service />
+			{/* <Advantages /> */}
+			{/* <Service />/ */}
 			<Category />
-      {/* <CategoryDetail /> */}
-			<Evaluate />
+
+			{/* <Evaluate /> */}
 			<Contact />
 
 			{/* <Hero /> */}
 			{/* <Testimonials /> */}
+
 			<Footer />
+
 			{/* <Auth /> */}
-		</div>
+		</main>
 	);
 };
 

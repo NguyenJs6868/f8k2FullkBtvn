@@ -1,9 +1,12 @@
+import { ThemeSwitcher } from "@/components/ThemeSwitcher2";
 import Button from "../components/button/Button";
 
 const Header = () => {
   return (
-    <div className="header-2">
-      <nav className="bg-white py-2 md:py-4">
+    // className='bg-white dark:bg-black'
+    <div className="header-2" >
+      {/* bg-white */}
+      <nav className=" py-2 md:py-4">
 
         <div className="container px-4 mx-auto md:flex md:items-center flex justify-center items-center position-relative">
           <div className="flex justify-between items-center position-absolute left-0">
@@ -45,17 +48,18 @@ const Header = () => {
             <button>Tokyo</button>
           </div> */}
 
-            <div className="position-absolute right-0">
-              <button className="pr-4"><i className="fa-regular fa-sun"></i></button>
-              <button className="pr-4"><i className="fa-solid fa-magnifying-glass"></i></button>
-              <button className="pr-4"><i className="fa-solid fa-user"></i></button>
+            <div className="head-action position-absolute right-0">
+              {/* <button className="pr-4"><i className="fa-regular fa-sun"></i></button> */}
+              <ThemeSwitcher />
+              <button><i className="fa-solid fa-magnifying-glass"></i></button>
+              <button><i className="fa-solid fa-user"></i></button>
               <Button text="Đặt ngay" />
             </div>
 
         </div>
       </nav>
-      {/* slider */}
-      <div className="bg-indigo-100 py-6 md:py-12">
+      {/* slider bg-indigo-100 */}
+      <div className=" py-6 md:py-12">
         <div className="container px-4 mx-auto">
           {/*  */}
           <div className="text-center max-w-2xl mx-auto">

@@ -1,4 +1,12 @@
 {
+  "contact": {
+    "title": "連絡先情報"
+  },
+  "project": {
+    "title": "個人プロジェクト",
+    "desc1": "プロジェクトは、作業をより適切に管理できるように設定されています。使用されるテクノロジ: HTML、CSS、JavaScript、ReactJs、マテリアル ui、Dnd-kit...",
+    "desc2": "このプロジェクトでは、ショッピング カートへの商品の追加や削除など、電子商取引サイトでの購入について説明します。使用されるテクノロジ: HTML、CSS、JavaScript、ReactJs..."
+  },
   "basicIfnor": {
     "contact": [
       {
@@ -23,27 +31,19 @@
       },
       {
         "title": "Mạng xã hội",
-        "content": "https://www.facebook.com"
+        "content": "https://www.facebook.com/2"
       }
     ],
-    "title": "Sở thích cá nhân",
+    "title": "個人的な好み",
     "hobbies": [
-      "Chạy bộ",
-      "Âm nhạc",
-      "Phim ảnh",
-      "Đọc sách",
-      "Tiếng Anh"
+      "ジョギング",
+      "音楽",
+      "映画",
+      "本を読む",
+      "英語"
     ]
   },
-  "contact": {
-    "title": "Thông tin liên hệ",
-    "phone": "Số liên lạc"
-  },
-  "project": {
-    "title": "Các dự án cá nhân",
-    "desc1": "Dự án giúp việc quản lý công việc một cách tốt hơn. Công nghệ sử dụng: Dnd-kit, HTML, SCSS, Javascript, ReactJs, NextJs, Material-ui, ...",
-    "desc2": "Dự án mô tả việc mua hàng trên các trang thương mại điện tử như thêm, xóa sản phẩm khỏi giỏ hàng. Công nghệ sử dụng: NextJs, HTML, CSS, Javascript, ReactJs ..."
-  },
+
   "skills": {
     "title": "Kỹ năng",
     "skill_list": [
@@ -57,16 +57,17 @@
       }
     ]
   },
+
   "history": {
     "title": "Lịch sử làm việc",
     "time_line": [
       {
         "time": "2011-2014",
-        "action": "THPT Ba Đinh Hà Nội"
+        "action": "ハノイのバーディン高校"
       },
       {
         "time": "2014-2018",
-        "action": "Đại học Kinh Doanh và Công Nghệ HN"
+        "action": "ハノイ商工大学"
       }
     ]
   }

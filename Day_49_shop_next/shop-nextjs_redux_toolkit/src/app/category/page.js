@@ -1,7 +1,8 @@
 import CategorySeeMore from '@/pages/CategorySeeMore';
 import React from 'react';
 
-function CategoryPage() {
+async function CategoryPage() {
+
 	return (
 		<>
 			<CategorySeeMore />

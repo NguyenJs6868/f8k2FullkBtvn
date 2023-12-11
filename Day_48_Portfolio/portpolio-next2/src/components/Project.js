@@ -7,8 +7,8 @@ function Project({data}) {
           <h4 className="heading-2">Trello web</h4>
           <p>{data.desc1}</p>
           <div className="flex gap-4 mt-2">
-            <a href="" class="text-danger">Link git</a>
-            <a href="" class="text-danger">Link demo</a>
+            <a href="" className="text-hight-light">Link git</a>
+            <a href="" className="text-hight-light">Link demo</a>
           </div>
           <hr className="mt-2 mb-4"/>
         </li>
@@ -18,8 +18,8 @@ function Project({data}) {
             {data.desc2}
           </p>
           <div className="flex gap-4 mt-2">
-            <a href="" class="text-danger">Link git</a>
-            <a href="" class="text-danger">Link demo</a>
+            <a href="" className="text-hight-light">Link git</a>
+            <a href="" className="text-hight-light">Link demo</a>
           </div>
           <hr className="mt-2 mb-4"/>
         </li>

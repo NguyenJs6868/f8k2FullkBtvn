@@ -1,8 +1,13 @@
+// Thư viện ở màn home
 import React, { Fragment } from 'react'
 import Image from 'next/image'
 import Button from '@/components/button/Button';
 
 async function Category() {
+
+	const response = await fetch('https://api-pages.vercel.app/api/v1/pages/1');
+	const category = await response.json();
+	console.log('layout app', category);
 
 	const arr = Array.from({ length: 8 });
 

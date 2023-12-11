@@ -39,6 +39,16 @@ button {
   }
 }
 
+.head-action {
+  // border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+//
+
 .shop-title {
   font-size: 24px;
   text-transform: capitalize;
@@ -153,7 +163,7 @@ button {
   position: relative;
   width: 100%;
   height: 100%;
-  user-select: none;
+  // user-select: none;
 
   & img {
     // border: 1px solid red;
@@ -194,12 +204,21 @@ button {
   color: #fff;
 }
 
-.category-detail-outlay__title {
+.category-detail-outlay__title-name {
   // border: 1px solid red;
   font-size: 52px;
   font-weight: 600;
   //  width: 100%;
   //  display: flex;
+  text-transform: capitalize;
+}
+
+
+.category-detail-outlay__title-content {
+  // border: 1px solid red;
+  font-size: 52px;
+  font-weight: 600;
+  text-transform: capitalize;
 }
 
 .category-detail-outlay__desctription {

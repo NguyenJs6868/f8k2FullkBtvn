@@ -4,7 +4,8 @@ import Nation from '../components/Nation'
 function Contact() {
 	return (
 		<>
-			<div className="bg-blue-200 flex items-center py-5">
+			{/* bg-blue-200  */}
+			<div className="flex items-center py-5">
 				<div className="w-full">
 					<h2 className="text-center text-blue-400 font-bold text-2xl uppercase mb-10">T Ì M Ư U Đ Ã I	</h2>
 					<div className="bg-white p-10 rounded-lg shadow md:w-3/4 mx-auto lg:w-1/2">

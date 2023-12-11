@@ -1,3 +1,5 @@
+// Thư viện click từ màn home ra một loạt
+//  T Ổ N G H Ợ P và các đầu địa điểm
 import Button from '@/components/button/Button';
 import Image from 'next/image';
 import React, { Fragment } from 'react';
@@ -11,7 +13,7 @@ function CategorySeeMore() {
 			{arr1 &&
 				arr1.map((_item, index) => {
 					return (
-						<div className="category-list-type">
+						<div key={index+1} className="category-list-type">
 							{/* <span className="shop-title">T H Ư V I Ệ N</span> */}
 							<span className="shop-title-see-more">
 								T Ổ N G H Ợ P {index+1}

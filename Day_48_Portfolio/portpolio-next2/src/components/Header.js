@@ -7,25 +7,31 @@ function Header({lang}) {
     localStorage.setItem('lang',lang)
   },[lang])
   return (
-    <header className="fixed top-0 z-10 w-full shadow-lg bg-primary">
-      <div className="flex items-center py-[1rem] wide">
+    <header className="header-el fixed top-0 z-10 w-full shadow-lg bg-primary">
+      <div className="flex items-center py-[1rem] wide gap-2">
         {/* logo */}
         <h1>
-          <Link href={`/`} className="w-[3rem] h-[3rem] text-[1.2rem] grid place-items-center rounded-[8px] bg-danger text-white">T</Link>
+          <Link href={`/`} className="head-link w-[3rem] h-[3rem] text-[1.2rem] grid place-items-center rounded-[8px] bg-hight-light text-white ml-2">CV</Link>
         </h1>
+        {/* <div className="head-link">Blogs</div>
+        <div className="head-link">Contact</div>
+        <div className="head-link">Profile</div> */}
         {/* dark mode */}
-        <div className="ml-auto">
+        <div className="ml-auto switcher-btn">
           <ThemeSwitcher/>
         </div>
-        {/* lang */}
+        {/* language */}
         <div className="flex gap-1 ml-[1rem]">
-          <Link href={'/vi'} className={`lang ${lang === 'vi' && 'active'}`}>VI</Link>
+          <Link href={'/vi'} className={`lang ${lang === 'vi' && 'text-hight-light'}`}>VI</Link>
           <span>|</span>
-          <Link href={'/en'} className={`lang ${lang === 'en' && 'active'}`}>EN</Link>
+          <Link href={'/en'} className={`lang ${lang === 'en' && 'text-hight-light'}`}>EN</Link>
+          <span>|</span>
+          <Link href={'/ja'} className={`lang ${lang === 'ja' && 'text-hight-light'}`}>JA</Link>
+
         </div>
       </div>
     </header>
-    
+
   )
 }
 
