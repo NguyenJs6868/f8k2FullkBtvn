@@ -1,0 +1,73 @@
+{
+  "basicIfnor": {
+    "contact": [
+      {
+        "title": "Ngày tháng năm sinh",
+        "content": "22/02/1996"
+      },
+      {
+        "title": "Giới tính",
+        "content": "Nam"
+      },
+      {
+        "title": "Số liên lạc",
+        "content": "0988360149"
+      },
+      {
+        "title": "Email",
+        "content": "nguyentrungnguyenth14@gmail.com"
+      },
+      {
+        "title": "Nơi sống",
+        "content": "Ba Đình, Hà Nội"
+      },
+      {
+        "title": "Mạng xã hội",
+        "content": "https://www.facebook.com"
+      }
+    ],
+    "title": "Sở thích cá nhân",
+    "hobbies": [
+      "Chạy bộ",
+      "Âm nhạc",
+      "Phim ảnh",
+      "Đọc sách",
+      "Tiếng Anh"
+    ]
+  },
+  "contact": {
+    "title": "Thông tin liên hệ",
+    "phone": "Số liên lạc"
+  },
+  "project": {
+    "title": "Các dự án cá nhân",
+    "desc1": "Dự án giúp việc quản lý công việc một cách tốt hơn. Công nghệ sử dụng: Dnd-kit, HTML, SCSS, Javascript, ReactJs, NextJs, Material-ui, ...",
+    "desc2": "Dự án mô tả việc mua hàng trên các trang thương mại điện tử như thêm, xóa sản phẩm khỏi giỏ hàng. Công nghệ sử dụng: NextJs, HTML, CSS, Javascript, ReactJs ..."
+  },
+  "skills": {
+    "title": "Kỹ năng",
+    "skill_list": [
+      {
+        "skill_title": "Kỹ năng lập trình",
+        "skill_detial": "- Frontend: ReactJS, VueJS, AngularJS, JQuery, Tailwind, Bootstrap, Core UI, Ant Design, React testing, Unit test storybook ui..... - Back End: REST API, Node.js, Expressjs."
+      },
+      {
+        "skill_title": "Kỹ năng giao tiếp - làm việc nhóm: ",
+        "skill_detial": "Có thể giao tiếp, trình bày các vấn đề kỹ thuật một cách dễ hiểu. Kết nối giữa các thành viên trong nhóm cùng trao đổi công việc."
+      }
+    ]
+  },
+  "history": {
+    "title": "Lịch sử làm việc",
+    "time_line": [
+      {
+        "time": "2011-2014",
+        "action": "THPT Ba Đinh Hà Nội"
+      },
+      {
+        "time": "2014-2018",
+        "action": "Đại học Kinh Doanh và Công Nghệ HN"
+      }
+    ]
+  }
+}

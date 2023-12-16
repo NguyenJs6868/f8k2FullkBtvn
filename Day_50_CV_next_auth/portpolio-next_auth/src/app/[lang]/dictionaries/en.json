@@ -1,0 +1,73 @@
+{
+  "basicIfnor": {
+    "contact": [
+      {
+        "title": "Date of birth",
+        "content": "02/22/1996"
+      },
+      {
+        "title": "Gender",
+        "content": "Male"
+      },
+      {
+        "title": "Contact number",
+        "content": "0988360149"
+      },
+      {
+        "title": "Email",
+        "content": "nguyentrungnguyenth14@gmail.com"
+      },
+      {
+        "title": "Place to live",
+        "content": "Ba Dinh, Hanoi"
+      },
+      {
+        "title": "Social Network",
+        "content": "https://www.facebook.com"
+      }
+    ],
+    "title": "Personal preferences",
+    "hobbies": [
+      "Jogging",
+      "Music",
+      "Movie",
+      "Read a book",
+      "English"
+    ]
+  },
+
+  "contact" : {
+    "title": "Contact Info",
+    "phone": "Phone contact"
+
+  },
+
+  "project" : {
+    "title": "My projects",
+    "desc1": "The project is set up to help manage work better. Technologies used: HTML, CSS, Javascript, ReactJs, Material-ui, Dnd-kit...",
+    "desc2": "The project describes purchases on e-commerce sites such as adding and removing products from the shopping cart. Technology used: HTML, CSS, Javascript, ReactJs..."
+  },
+
+
+  "skills": {
+    "title": "My skills",
+    "heading1": "Web developer",
+    "heading2": "Other skills",
+    "text2": "Relatively good research and search skills. Working thinking, good teamwork skills compared to age."
+  },
+
+  "history": {
+    "title": "Work history",
+    "time_line": [
+      {
+        "time": "2011-2014",
+        "action": "Ba Dinh High School, Hanoi"
+      },
+      {
+        "time": "2014-2018",
+        "action": "Hanoi University of Business and Technology"
+      }
+    ]
+  }
+
+}
