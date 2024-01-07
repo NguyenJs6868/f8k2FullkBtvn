@@ -1,5 +1,5 @@
-import Footer from "@/components/Footer";
-import AuthLoginForm from "./_components/AuthLoginForm";
+import Footer from "@/components/Footer/Footer";
+import AuthLoginForm from "./_components/authLoginForm/AuthLoginForm";
 import { getTranslations, getLocale } from "next-intl/server";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
@@ -20,7 +20,7 @@ export default async function auth() {
   };
   return (
     <div className="mt-[120px]">
-      <Footer />
+      {/* <Footer /> */}
       <AuthLoginForm translation={translation} locale={locale} />
     </div>
   );

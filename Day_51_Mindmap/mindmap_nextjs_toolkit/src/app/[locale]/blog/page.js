@@ -1,5 +1,5 @@
 import React from "react";
-import { getTranslations, getLocale } from "next-intl/server";
+import { getTranslations, getLưocale } from "next-intl/server";
 export default async function Blog() {
   const t = await getTranslations("Contact");
   return (

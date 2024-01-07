@@ -1,52 +1,52 @@
 {
   "HomeHeader": {
-    "title": "Developer 22 tuổi nhưng cột sống ở tuổi 80."
+    "title": "title"
   },
   "HomeInformation": {
-    "skillHeading": "Những kỹ năng của tôi",
-    "skillSubHead1": "Kỹ năng về web",
-    "skillTitle1": "HTML5, CSS3, SCSS, UI/UX, FIGMA, JS, ReactJs, NextJs...",
-    "skillSubHead2": "Những kỹ năng khác",
-    "skillTitle2": "Có khả năng tư duy ở mức khá, Có khả năng tự học và tìm kiếm thông tin, Có khả năng làm việc nhóm",
-    "historyHeading": "Lịch sử",
-    "historySubHead1": "2017-2020",
-    "historyTitle1": "Học cấp 3 tại trường cấp 3 trung học phổ thông Quất Lâm",
-    "historySubHead2": "2020-hiện tại",
-    "historyTitle2": "Học đại học tại đại học Mở Hà Nội"
+    "skillHeading": "skillHeading",
+    "skillSubHead1": "skillSubHead1",
+    "skillTitle1": "skillTitle1",
+    "skillSubHead2": "skillSubHead2",
+    "skillTitle2": "skillTitle2",
+    "historyHeading": "historyHeading",
+    "historySubHead1": "historySubHead1",
+    "historyTitle1": "historyTitle1",
+    "historySubHead2": "historySubHead2",
+    "historyTitle2": "historyTitle2"
   },
   "HomeProject": {
-    "projectHeading": "Dự án cá nhân",
-    "projectName1": "Project Trello",
-    "projectDes1": "Một dự án nhỏ được viết với react ",
-    "projectDes1-2": "Một trang web đơn giản cho phép quản lý task. Sử dụng ReactJs"
+    "projectHeading": "projectHeading",
+    "projectName1": "projectName1",
+    "projectDes1": "projectDes1",
+    "projectDes1-2": "projectDes1"
   },
   "HomeHobby": {
-    "hobbyHeading": "Sở thích của tôi",
-    "hobby1": "Đọc truyện tranh, Xem anime, Nghe nhạc lofi",
-    "hobby2": "Đọc sách, Tìm hiểu về các ngôn ngữ lập trình, các công nghệ mới"
+    "hobbyHeading": "hobbyHeading",
+    "hobby1": "hobby1",
+    "hobby2": "hobby2"
   },
   "Footer": {
-    "title": "Xin chào, Mình là Trưởng. Chào mừng bạn tới với trang cá nhân của mình nhé!"
+    "title": "title"
   },
   "Auth": {
-    "authHeading": "Đăng nhập",
-    "authGoogle": "Đăng nhập với Google",
-    "authGithub": "Đăng nhập với Github",
-    "title": "Đăng nhập để liên hệ, bình luận và khám phá nhiều tính năng thú vị"
+    "authHeading": "Xin chào",
+    "authGoogle": "authGoogle",
+    "authGithub": "authGithub",
+    "title": "title"
   },
   "Profile": {
-    "notRegister": "Chưa đăng ký",
-    "editContent": "Sửa thông tin",
-    "logout": "Đăng xuất",
-    "viewedArticles": "Bài viết đã xem",
-    "viewedArticlesTitle": ":( Bạn chưa xem bài viết nào",
-    "commentWrote": "Comment đã viết",
-    "commentTitle": ":( Bạn chưa bình luận bài viết nào"
+    "notRegister": "notRegister",
+    "editContent": "editContent",
+    "logout": "logout",
+    "viewedArticles": "viewedArticles",
+    "viewedArticlesTitle": "viewedArticlesTitle",
+    "commentWrote": "commentWrote",
+    "commentTitle": "commentTitle"
   },
   "Blog": {
-    "title": "Đang trong quá trình phát triển..."
+    "title": "title"
   },
   "Contact": {
-    "title": "Đang trong quá trình phát triển..."
+    "title": "title"
   }
 }

@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "@/navigation";
 import Profile from "./_components/Profile";
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer/Footer";
 import { getProviders } from "next-auth/react";
 import { getTranslations, getLocale } from "next-intl/server";
 

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { Providers } from "@/app/providers";
 import AuthProvider from "@/AuthProvider";
-import Header from "@/components/Header";
+import Header from "@/components/Headed/Header";
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";
 

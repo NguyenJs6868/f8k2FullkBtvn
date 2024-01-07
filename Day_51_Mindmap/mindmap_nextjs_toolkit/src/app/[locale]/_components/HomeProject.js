@@ -11,7 +11,7 @@ export default function HomeProject() {
           {t("projectDes1")} <br />
           {t("projectDes1-2")}
         </p>
-        <div className="flex gap-x-[20px] font-bold text-sky-500">
+        <div className="flex gap-x-[20px] font-bold text-sky2-500">
           <Link href="https://trello-azure.vercel.app/">Demo</Link>
           <Link href="https://github.com/OkazakiTruong/BQTruong-F8-K2-Offline/tree/main/Day47_2/Trello">
             Code
@@ -26,7 +26,7 @@ export default function HomeProject() {
           {t("projectDes1")} <br />
           {t("projectDes1-2")}
         </p>
-        <div className="flex gap-x-[20px] font-bold text-sky-500">
+        <div className="flex gap-x-[20px] font-bold text-sky2-500">
           <Link href="https://trello-azure.vercel.app/">Demo</Link>
           <Link href="https://github.com/OkazakiTruong/BQTruong-F8-K2-Offline/tree/main/Day47_2/Trello">
             Code
@@ -41,7 +41,7 @@ export default function HomeProject() {
           {t("projectDes1")} <br />
           {t("projectDes1-2")}
         </p>
-        <div className="flex gap-x-[20px] font-bold text-sky-500">
+        <div className="flex gap-x-[20px] font-bold text-sky2-500">
           <Link href="https://trello-azure.vercel.app/">Demo</Link>
           <Link href="https://github.com/OkazakiTruong/BQTruong-F8-K2-Offline/tree/main/Day47_2/Trello">
             Code

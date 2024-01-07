@@ -1,52 +1,52 @@
 {
   "HomeHeader": {
-    "title": "A 22-year-old developer with the spine of an 80-year-old"
+    "title": "title"
   },
   "HomeInformation": {
-    "skillHeading": "My skill",
-    "skillSubHead1": "Web developer",
-    "skillTitle1": "HTML5, CSS3, SCSS, UI/UX, FIGMA, JS, ReactJs, NextJs...",
-    "skillSubHead2": "Other skill",
-    "skillTitle2": "Have a fairly good level of analytical thinking, Possess self-learning and information-searching abilities, Demonstrate teamwork skills.",
-    "historyHeading": "Histories",
-    "historySubHead1": "2017-2020",
-    "historyTitle1": "Studied high school level 3 at Quat Lam High School",
-    "historySubHead2": "2020-now",
-    "historyTitle2": "Studied at Hanoi Open University"
+    "skillHeading": "skillHeading",
+    "skillSubHead1": "skillSubHead1",
+    "skillTitle1": "skillTitle1",
+    "skillSubHead2": "skillSubHead2",
+    "skillTitle2": "skillTitle2",
+    "historyHeading": "historyHeading",
+    "historySubHead1": "historySubHead1",
+    "historyTitle1": "historyTitle1",
+    "historySubHead2": "historySubHead2",
+    "historyTitle2": "historyTitle2"
   },
   "HomeProject": {
-    "projectHeading": "Self project",
-    "projectName1": "Project Trello",
-    "projectDes1": "A small project written in React",
-    "projectDes1-2": "A simple website for task management. Using ReactJs"
+    "projectHeading": "projectHeading",
+    "projectName1": "projectName1",
+    "projectDes1": "projectDes1",
+    "projectDes1-2": "2"
   },
   "HomeHobby": {
-    "hobbyHeading": "My hobbies",
-    "hobby1": "Reading manga, Watching anime, Listening to lofi music",
-    "hobby2": "Reading books, Exploring programming languages, Learning about new technologies"
+    "hobbyHeading": "hobbyHeading",
+    "hobby1": "hobby1",
+    "hobby2": "hobby2"
   },
   "Footer": {
-    "title": "Hello, I'm Truong. Welcome to my personal page!"
+    "title": "title"
   },
   "Auth": {
-    "authHeading": "Login",
-    "authGoogle": "Login with Google",
-    "authGithub": "Login with Github",
-    "title": "Login to connect, comment, and discover many interesting features"
+    "authHeading": "Hello",
+    "authGoogle": "authGoogle",
+    "authGithub": "authGithub",
+    "title": "title"
   },
   "Profile": {
-    "notRegister": "Not registered",
-    "editContent": "Edit Content",
-    "logout": "Logout",
-    "viewedArticles": "Viewed Articles",
-    "viewedArticlesTitle": ":( You haven't viewed any articles yet",
-    "commentWrote": "Comments Written",
-    "commentTitle": ":( You haven't commented on any articles yet"
+    "notRegister": "notRegister",
+    "editContent": "editContent",
+    "logout": "logout",
+    "viewedArticles": "viewedArticles",
+    "viewedArticlesTitle": "viewedArticlesTitle",
+    "commentWrote": "commentWrote",
+    "commentTitle": "commentTitle"
   },
   "Blog": {
-    "title": "In the process of development..."
+    "title": "title"
   },
   "Contact": {
-    "title": "In the process of development..."
+    "title": "title"
   }
 }

@@ -1,0 +1,7 @@
+APP_NAME=F8
+
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=f8_fullstack_k2
+DB_USER=postgres
+DB_PASSWORD=12345678

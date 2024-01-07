@@ -51,10 +51,10 @@ export default function Profile({ locale, translation }) {
                 alt=""
                 className="w-[30px] rounded-full"
               />
-              Bùi Quang Trưởng
+              Nguyễn Trun Nguyên
             </button>
             <button
-              className="p-[10px] bg-sky-500 rounded-r-[10px] flex items-center"
+              className="p-[10px] bg-sky2-500 rounded-r-[10px] flex items-center"
               onClick={handleSignInGithub}
             >
               <i className="fa-brands fa-github mr-[10px] text-xl"></i>
@@ -70,7 +70,7 @@ export default function Profile({ locale, translation }) {
               <i className="fa-brands fa-google mr-[10px] text-xl"></i>
               {translation.notRegister}
             </button>
-            <button className="p-[10px] bg-sky-500 rounded-r-[10px] flex items-center gap-x-[10px]">
+            <button className="p-[10px] bg-sky2-500 rounded-r-[10px] flex items-center gap-x-[10px]">
               <img
                 src={session?.user?.image}
                 alt=""
