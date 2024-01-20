@@ -1,0 +1,42 @@
+<h1>Form gửi gmail</h1>
+
+<form action="" method="post">
+
+  <div class="mb-3">
+    <label for="emailTo"> Email gửi đến </label>
+    <input
+      id="emailTo"
+      type="email"
+      name="email_to"
+      class="form-control"
+      placeholder="Email gửi đến..."
+      value="nguyentrungnguyenth15@gmail.com"
+    />
+    <!-- value="<%= req.email %>" -->
+  </div>
+
+  <div class="mb-3">
+    <label for="title"> Tiêu đề </label>
+    <input id="title" type="text" name="title" class="form-control" placeholder="Tiêu đề..." value="Tiêu đề"/>
+    <!-- value="<%= req.title %>" -->
+  </div>
+
+  <div class="mb-3">
+    <label for="content"> Nội dung </label>
+    <textarea
+      id="content"
+      type="text"
+      name="content"
+      class="form-control"
+      placeholder="Nội dung..."
+      value="Nội dung..."
+      rows="4"
+      cols="50" >
+    </textarea>
+    <!-- value="<%= req.content %>" -->
+  </div>
+
+  <button type="submit" class="btn btn-success">Tiền hành gửi gmail</button>
+  <a href="/email" class="btn btn-danger">Hủy</a>
+
+</form>
